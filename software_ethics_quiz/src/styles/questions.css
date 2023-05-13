@@ -24,7 +24,6 @@
 }
 
 .scenarioTitle {
-    height: 100%;
     font-size: 75px;
     font-weight: bold;
 }
@@ -83,4 +82,27 @@
 
 .answers {
     font-size: 24px;
+}
+
+.answer {
+    display: flex;
+}
+
+.continueButtonContainer {
+    justify-content: center;
+    display: flex;
+}
+
+.continueButton {
+    width: 300px;
+    height: 80px;
+    font-size: 40px !important;
+    padding-bottom: 20px !important;
+    border-width: 3px !important;
+    border-radius: 20px !important;
+}
+
+.continueButton:hover {
+    background: #ffffff4e !important;
+    color: #FFFFFF !important;
 }

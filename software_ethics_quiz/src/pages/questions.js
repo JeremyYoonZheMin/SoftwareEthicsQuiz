@@ -4,8 +4,19 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import nerd from '../assets/nerd.png';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react'
+import Button from 'react-bootstrap/Button';
 
 export default function Questions() {
+
+    const [selectedAnswer, setSelectedAnswer] = useState(null)
+
+    function selectAnswer(event) {
+        let answer = event.target.id;
+        setSelectedAnswer(answer)
+    }
+
     return(
         <div className="questionsPage">
             <div className='questionsHeader'>
@@ -32,16 +43,39 @@ export default function Questions() {
                         <Col>
                         <div className='answersContainer'>
                             <div className='answerPrompt'>Please select an answer:</div>
-                            <Stack gap={3} className='answers'>
-                                <div className='answer'>Capitalise on the increase in polarisation to attract political and ideological investors as advertisers to further increase Convey’s reach and influence.</div>
-                                <div className='answer'>Remove the design and algorithms that contribute to the creation of these echo chambers.</div>
-                                <div className='answer'>Wait (and possibly fight) for regulations to require change from all social media platforms, so the company can make the required ethical changes without losing to its competitors.</div>
-                                <div className='answer'>Fight against regulations and allow users’ subconscious biases to determine their content, as is the situation now.</div>
-                            </Stack>
+                            <Form className='answers'>
+                                <div key={'answer-1'} className="mb-3 answer">
+                                    <Form.Check type="radio" id="answer-1" checked={selectedAnswer=='answer-1'} onChange={selectAnswer}/>
+                                    <div className='ms-3'>
+                                        Capitalise on the increase in polarisation to attract political and ideological investors as advertisers to further increase Convey’s reach and influence.
+                                    </div>
+                                </div>
+                                <div key={'answer-2'} className="mb-3 answer">
+                                    <Form.Check type="radio" id="answer-2" checked={selectedAnswer=='answer-2'} onChange={selectAnswer}/>
+                                    <div className='ms-3'>
+                                        Remove the design and algorithms that contribute to the creation of these echo chambers.
+                                    </div>
+                                </div>
+                                <div key={'answer-3'} className="mb-3 answer">
+                                    <Form.Check type="radio" id="answer-3" checked={selectedAnswer=='answer-3'} onChange={selectAnswer}/>
+                                    <div className='ms-3'>
+                                        Wait (and possibly fight) for regulations to require change from all social media platforms, so the company can make the required ethical changes without losing to its competitors.
+                                    </div>
+                                </div>
+                                <div key={'answer-4'} className="mb-3 answer">
+                                    <Form.Check type="radio" id="answer-4" checked={selectedAnswer=='answer-4'} onChange={selectAnswer}/>
+                                    <div className='ms-3'>
+                                        Fight against regulations and allow users’ subconscious biases to determine their content, as is the situation now.
+                                    </div>
+                                </div>
+                            </Form>
                         </div>
                         </Col>
                     </Row>
                 </Container>
+                <div className='continueButtonContainer my-5'>
+                    <Button variant='outline-light' size='lg' className='continueButton'>Continue</Button>
+                </div>
             </div>
         </div>
     )
