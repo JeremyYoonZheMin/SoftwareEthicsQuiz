@@ -1,0 +1,86 @@
+.questionsPage {
+    height: 100%;
+    width: 100%;
+    background-color: #ab9ed9;
+    padding-bottom: 100px;
+}
+
+.questionsHeader {
+    height: 160px;
+    background-color: #9581E0;
+    border-bottom-right-radius: 100% 170%;
+    border-bottom-left-radius: 100% 170%;
+    width: 106%;
+    position: fixed;
+    left: -3%;
+    color: #FFFFFF;
+    text-align: center;
+    z-index: 2;
+}
+
+.questionNumber {
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+.scenarioTitle {
+    height: 100%;
+    font-size: 75px;
+    font-weight: bold;
+}
+
+.content {
+    height: 100%;
+    padding-top: 190px;
+}
+
+.contentContainer {
+    padding-right: 0px !important;
+}
+
+.nerd {
+    padding: 0px 50px 0px 50px;
+}
+
+.scenarioText {
+    background-color: #FFFFFF;
+    opacity: 0.75;
+    font-size: 24px;
+    padding: 50px 50px 50px 100px;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.questionTitle {
+    font-size: 99px;
+    font-weight: bold;
+    color: #000000;
+    position: relative;
+    top: 159px;
+    left: 190px;
+    z-index: 1;
+    margin-top: -100px;
+}
+
+.questionText {
+    background-color: #FFFFFF;
+    opacity: 0.75;
+    font-size: 24px;
+    padding: 120px 50px 50px 100px;
+    margin: 100px 100px 100px 100px;
+    border-radius: 20px;
+}
+
+.answersContainer {
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.answerPrompt {
+    font-size: 32px;
+    font-weight: bold;
+    padding-bottom: 30px;
+}
+
+.answers {
+    font-size: 24px;
+}
