@@ -1,0 +1,28 @@
+.landingPage {
+    height: 100vh;
+    background-image: url('../assets/landingBackground.png');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    padding-right: 100px;
+}
+.landingTitle {
+    color: #FFFFFF;
+    font-size: 72px;
+    text-align: right;
+}
+.landingSubtitle {
+    color: #FFFFFF;
+    font-size: 36px;
+    font-style: italic;
+    text-align: right;
+}
+.startButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 50px;
+}
+.startButton {
+    width: 150px;
+}

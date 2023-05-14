@@ -1,0 +1,25 @@
+.termPage {
+    background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('../assets/landingBackground.png');
+    background-position: center;
+    background-size: cover;
+    padding: 50px 100px;
+    min-height: 100vh;
+}
+.termsTitle {
+    color: #FFFFFF;
+    font-size: 32px;
+    text-align: center;
+}
+.termsBody {
+    color: #FFFFFF;
+    font-size: 16px;
+    padding-top: 30px;
+}
+.checkbox {
+    color: #FFFFFF;
+    padding-top: 30px;
+}
+.continueButtonContainer {
+    padding-top: 50px;
+    flex: 2;
+}
