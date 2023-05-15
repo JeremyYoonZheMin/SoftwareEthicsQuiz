@@ -12,7 +12,7 @@ function SummaryAndFeedback() {
     return (
         <div className="summaryAndFeedbackPage">
             <div className="summaryAndFeedbackHeader">
-                <div>Summary and Feedback</div>
+                <h1 className='headerTitle'>Summary and Feedback</h1>
             </div>
             <Container>
                 <Row className="content">

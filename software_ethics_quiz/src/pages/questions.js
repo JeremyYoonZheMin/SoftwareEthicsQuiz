@@ -21,7 +21,7 @@ export default function Questions() {
         <div className="questionsPage">
             <div className='questionsHeader'>
                 <div className="questionNumber">Question 1/16</div>
-                <h1 className='scenarioTitle'>Scenario 1</h1>
+                <h1 className='headerTitle'>Scenario 1</h1>
             </div>
             <div className='content'>
                 <Container fluid className='contentContainer'>

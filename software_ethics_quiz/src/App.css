@@ -37,3 +37,8 @@
     transform: rotate(360deg);
   }
 }
+
+.headerTitle {
+    font-size: 75px;
+    font-weight: bold;
+}
