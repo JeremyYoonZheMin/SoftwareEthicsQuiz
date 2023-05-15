@@ -1,9 +1,9 @@
 .summaryAndFeedbackPage {
-    height: 100%;
+    height: 100%;    
     width: 100%;
-    background-image: url('../assets/landingBackground.png');
+    background-image: url("../assets/landingBackground.png");
     background-attachment: fixed;
-    
+
     background-position: center;
     background-size: cover;
     /* display: flex; */
@@ -12,21 +12,35 @@
     /* background-color: #ab9ed9; */
 }
 
-.summaryAndFeedbackHeader {
+/* .summaryAndFeedbackHeader {
     color: #FFFFFF;
     text-align: center;
     font-size: 96px;
+} */
+
+.summaryAndFeedbackHeader {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    color: #ffffff;
+    padding: 20px 50px 20px 20px;
+    text-align: center;
 }
+
+/* .summaryAndFeedbackContent {
+    height: 100vh;    
+
+} */
 
 .feedback-container {
     padding-right: 20px;
-  }
-  
-  .feedback {
-    margin-top: 20px;
-  }
+}
 
-  .questionButton {
+.feedback {
+    margin-top: 20px;
+}
+
+.questionButton {
     width: 300px;
     height: 80px;
     font-size: 40px !important;
@@ -36,6 +50,5 @@
 }
 
 .list-group-item {
-  background-color: transparent;
-  }
-  
+    background-color: transparent;
+}
