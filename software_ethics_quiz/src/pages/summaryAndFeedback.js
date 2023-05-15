@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Button, ListGroup, Stack } from 'react-bootstrap';
+import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
@@ -41,66 +41,39 @@ function SummaryAndFeedback() {
                             </Stack>
 
                         </Col>
-                        <Col sm={4} className="questions-container">
-                            <ListGroup class="list-group-item">
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1)}>Question 1</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2)}>Question 2</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3)}>Question 3</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4)}>Question 4</Button>
-                                </ListGroup.Item>
-                            </ListGroup>
+                        <Col sm={4} className="questions-container">                          
+                            <Stack gap={1}>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1)}>Question 1</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2)}>Question 2</Button>                               
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3)}>Question 3</Button>                               
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4)}>Question 4</Button>
+                            </Stack>
                             <br />
-                            <ListGroup class="list-group-item">
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(5)}>Question 5</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(6)}>Question 6</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(7)}>Question 7</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(8)}>Question 8</Button>
-                                </ListGroup.Item>
-                            </ListGroup>
+                            <Stack gap={1}>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(5)}>Question 5</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(6)}>Question 6</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(7)}>Question 7</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(8)}>Question 8</Button>
+                            </Stack>
                             <br />
-                            <ListGroup class="list-group-item">
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(9)}>Question 9</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(10)}>Question 10</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(11)}>Question 11</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(12)}>Question 12</Button>
-                                </ListGroup.Item>
-                            </ListGroup>
+                            <Stack gap={1}>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(9)}>Question 9</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(10)}>Question 10</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(11)}>Question 11</Button>  
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(12)}>Question 12</Button>
+                            </Stack>    
                             <br />
-                            <ListGroup class="list-group-item">
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(13)}>Question 13</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(14)}>Question 14</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(15)}>Question 15</Button>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Button variant='outline-light' className="questionButton" onClick={() => handleClick(16)}>Question 16</Button>
-                                </ListGroup.Item>
-                            </ListGroup>
+                            <Stack gap={1}>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(13)}>Question 13</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(14)}>Question 14</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(15)}>Question 15</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(16)}>Question 16</Button>
+                            </Stack>                        
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                        <Button variant='outline-light' className="tryAgainButton">Try Again</Button>
                         </Col>
                     </Row>
                 </Container>
