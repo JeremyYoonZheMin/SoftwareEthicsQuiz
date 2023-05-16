@@ -26,11 +26,6 @@
     font-size: 18px;
 }
 
-/* .scenarioTitle {
-    font-size: 75px;
-    font-weight: bold;
-} */
-
 .content {
     height: 100%;
     padding-top: 190px;
@@ -40,8 +35,17 @@
     padding-right: 0px !important;
 }
 
+.contentRow {
+    width: 100%;
+    margin-left: 0px !important;
+}
+
 .nerd {
     padding: 0px 50px 0px 50px;
+}
+
+.scenarioTextColumn {
+    padding-right: 0px !important;
 }
 
 .scenarioText {
@@ -61,6 +65,7 @@
     left: 190px;
     z-index: 1;
     margin-top: -100px;
+    width: fit-content;
 }
 
 .questionText {

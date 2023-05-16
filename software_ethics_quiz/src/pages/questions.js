@@ -25,21 +25,21 @@ export default function Questions() {
             </div>
             <div className='content'>
                 <Container fluid className='contentContainer'>
-                    <Row>
+                    <Row className='contentRow'>
                         <Col xs={4} className='d-flex align-items-center'>
                             <img src={nerd} alt='Person on laptop' className='img-fluid nerd'></img>
                         </Col>
-                        <Col>
+                        <Col className='scenarioTextColumn'>
                             <div className='scenarioText'>Facebook and Twitter use sophisticated algorithms to determine the exact combination of notifications, icons, and lurid content that will keep their users hooked. As a result, everyone’s social media experience is different, with each News Feed perfectly tailored to the user’s vices. The result is a digital echo chamber that reinforces an individual’s parochial worldview. Moreover, social media shows content a user is likely to click on, regardless of whether it’s true, useful, or good for their well-being.You are part of a company publishing a popular social media application called Convey, similar to Facebook. In the interests of economic profit, your company has gradually implemented more and more features into Convey to drive user engagement in the hopes of gathering more user data.</div>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='contentRow'>
                         <Col>
                             <div className='questionTitle'>Question 1</div>
                             <div className='questionText'>It was discovered that, by presenting users with more inflammatory content to boost user engagement, echo chambers and silos have been created on Convey. This has led to the propagation of misinformation and more extreme ideas inside these echo chambers, and have contributed to a larger divide in the population. What should be Convey's publisher's first course of action?</div>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='contentRow'>
                         <Col>
                         <div className='answersContainer'>
                             <div className='answerPrompt'>Please select an answer:</div>
