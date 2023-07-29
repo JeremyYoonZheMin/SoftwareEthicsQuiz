@@ -19,6 +19,25 @@
     color: #FFFFFF;
     text-align: center;
     z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.questionsHeaderCentreColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.questionNavigation {
+    padding-top: 14px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .questionNumber {

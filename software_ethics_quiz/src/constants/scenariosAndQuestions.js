@@ -35,7 +35,7 @@ export const scenariosAndQuestions = {
                     'ethicalPrinciples': "The Primacy of the Public Interest"
                 },
                 {
-                    'question': "TYour customers’ data is compromised which includes information like username, passwords, passport number, medicare etc. and you have to inform the general public about the situation. \n\nWhat should you convey to your customers?",
+                    'question': "Your customers’ data is compromised which includes information like username, passwords, passport number, medicare etc. and you have to inform the general public about the situation. \n\nWhat should you convey to your customers?",
 
                     'answers': [
                         {
@@ -126,6 +126,5 @@ export const scenariosAndQuestions = {
                 },
             ]
         },
-        ""
     ]
 }
