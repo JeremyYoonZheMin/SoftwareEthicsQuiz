@@ -5,20 +5,20 @@ import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
 import nerd from '../assets/nerd.png';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
 import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
 
 export default function Questions() {
 
-    let numQuestions = scenariosAndQuestions.scenarios.reduce((numQuestions, scenario) => numQuestions + scenario.questions.length, 0)
-    let selectedAnswersStructure = Array(scenariosAndQuestions.scenarios.length)
+    let numQuestions = scenariosAndQuestions.reduce((numQuestions, scenario) => numQuestions + scenario.questions.length, 0)
+    let selectedAnswersStructure = Array(scenariosAndQuestions.length)
     for (let i = 0; i < selectedAnswersStructure.length; i++) {
-        selectedAnswersStructure[i] = Array(scenariosAndQuestions.scenarios[i].questions.length)
+        selectedAnswersStructure[i] = Array(scenariosAndQuestions[i].questions.length)
     }
 
     const [currentScenario, setCurrentScenario] = useState(0)
-    const [currentQuestion, setCurrentQuestion] = useState(0)
+    const [currentQuestion, setCurrentQuestion] = useState([0, 0]) // [index of question out of all questions, index of question within scenario]
     const [selectedAnswers, setSelectedAnswers] = useState(selectedAnswersStructure)
     const [selectedAnswer, setSelectedAnswer] = useState(null)
 
@@ -29,39 +29,35 @@ export default function Questions() {
 
     function goToNextQuestion(event) {
         setSelectedAnswer(null)
-        if (currentQuestion + 1 == scenariosAndQuestions.scenarios[currentScenario].questions.length) {
-            if (currentScenario + 1 == scenariosAndQuestions.scenarios.length) {
-                // end of quiz
-            }
-            else {
-                setCurrentScenario(currentScenario + 1)
-                setCurrentQuestion(0)
-            }
-        }
-        else {
-            setCurrentQuestion(currentQuestion + 1)
+        if (currentQuestion[0] == numQuestions - 1) {
+            // end of quiz
+        } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
+            setCurrentScenario(currentScenario + 1)
+            setCurrentQuestion([currentQuestion[0] + 1, 0])
+        } else {
+            setCurrentQuestion([currentQuestion[0] + 1, currentQuestion[1] + 1])
         }
     }
 
     function goToPreviousQuestion(event) {
         setSelectedAnswer(null)
-        if (currentQuestion != 0) {
-            setCurrentQuestion(currentQuestion - 1)
+        if (currentQuestion[1] != 0) {
+            setCurrentQuestion([currentQuestion[0] - 1, currentQuestion[1] - 1])
         } else {
             setCurrentScenario(currentScenario - 1)
-            setCurrentQuestion(scenariosAndQuestions.scenarios[currentScenario].questions.length - 1)
+            setCurrentQuestion([currentQuestion[0] - 1, scenariosAndQuestions[currentScenario].questions.length - 1])
         }   // User should not be able to call this function when they are on the first question
     }
 
     return(
         <div className="questionsPage">
             <div className='questionsHeader'>
-                <h1 className={`questionNavigation ${(currentScenario == 0 && currentQuestion == 0) && 'hidden'}`} onClick={goToPreviousQuestion}><i class="bi bi-arrow-left-circle-fill"></i></h1>
+                <h1 className={`questionNavigation ${(currentScenario == 0 && currentQuestion[0] == 0) && 'hidden'}`} onClick={goToPreviousQuestion}><i class="bi bi-arrow-left-circle-fill"></i></h1>
                     <div className='questionHeaderCentreColumn'>
-                        <div className="questionNumber">Question {currentQuestion+1}/{numQuestions}</div>
+                        <div className="questionNumber">Question {currentQuestion[0]+1}/{numQuestions}</div>
                         <h1 className='headerTitle'>Scenario {currentScenario+1}</h1>
                     </div>
-                <h1 className='questionNavigation' onClick={goToNextQuestion}><i class="bi bi-arrow-right-circle-fill"></i></h1>
+                <h1 className={`questionNavigation ${(currentQuestion[0] == numQuestions - 1) && 'hidden'}`} onClick={goToNextQuestion}><i class="bi bi-arrow-right-circle-fill"></i></h1>
             </div>
             <div className='content'>
                 <Container fluid className='contentContainer'>
@@ -70,13 +66,13 @@ export default function Questions() {
                             <img src={nerd} alt='Person on laptop' className='img-fluid nerd'></img>
                         </Col>
                         <Col className='scenarioTextColumn'>
-                            <div className='scenarioText'>{scenariosAndQuestions.scenarios[currentScenario].scenario}</div>
+                            <div className='scenarioText'>{scenariosAndQuestions[currentScenario].scenario}</div>
                         </Col>
                     </Row>
                     <Row className='contentRow'>
                         <Col>
-                            <div className='questionTitle'>Question {currentQuestion+1}</div>
-                            <div className='questionText'>{scenariosAndQuestions.scenarios[currentScenario].questions[currentQuestion].question}</div>
+                            <div className='questionTitle'>Question {currentQuestion[1]+1}</div>
+                            <div className='questionText'>{scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].question}</div>
                         </Col>
                     </Row>
                     <Row className='contentRow'>
@@ -84,7 +80,7 @@ export default function Questions() {
                         <div className='answersContainer'>
                             <div className='answerPrompt'>Please select an answer:</div>
                             <Form className='answers'>
-                                {scenariosAndQuestions.scenarios[currentScenario].questions[currentQuestion].answers.map((answer, i) => 
+                                {scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].answers.map((answer, i) => 
 
                                     <div key={`answer-${i}`} className="mb-3 answer">
                                         <Form.Check type="radio" id={`answer-${i}`} checked={selectedAnswer==`answer-${i}`} onChange={selectAnswer}/>
