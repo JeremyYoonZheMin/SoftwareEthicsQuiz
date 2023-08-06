@@ -20,7 +20,6 @@
 
 .summaryAndFeedbackHeader {
     width: 100%;
-    position: sticky;
     top: 0;
     color: #ffffff;
     padding: 20px 50px 20px 20px;
@@ -104,6 +103,6 @@
     color: #ffffff !important;
 }
 
-/* .scenarioBtn {
-    
-} */
+.feedbackBoxBtn {
+    margin: 5px;
+}
