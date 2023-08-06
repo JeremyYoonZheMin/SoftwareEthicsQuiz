@@ -25,7 +25,6 @@
     color: #ffffff;
     padding: 20px 50px 20px 20px;
     text-align: center;
-    
 }
 
 /* .summaryAndFeedbackContent {
@@ -35,6 +34,7 @@
 
 .feedback-container {
     padding-right: 20px;
+    z-index: 0;
 }
 
 .feedbackBoxTitle {
@@ -47,9 +47,17 @@
     z-index: 1;
 }
 
-.feedbackBox {
-    background-color: #ffffff;
-    opacity: 0.75;
+.feedbackBoxInnerTitle {
+    font-weight: bold;
+    text-align: left;
+}
+
+.feedbackBox .star {
+    /* color: #bbb0a8; */
+    margin: 10px;
+}
+
+.feedbackBox, .feedbackBoxQuestionBox {
     font-size: 24px;
     padding: 40px 30px 20px 30px;
     margin-bottom: 20px;
@@ -57,10 +65,16 @@
     text-align: center;
 }
 
-.feedbackBox .star {
-    /* color: #bbb0a8; */
-    margin: 10px;
+.feedbackBox {
+    background-color: rgba(255, 255, 255, 0.75);
 }
+
+.feedbackBoxQuestionBox {
+    background-color: #1f1f1f;
+    color: #ffffff;
+}
+
+
 
 .questionButton {
     width: 300px;
@@ -73,21 +87,21 @@
 
 .questionButton:hover {
     background: #ffffff4e !important;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
 }
 
 .tryAgainButton {
     width: 300px;
     height: 80px;
     font-size: 40px !important;
-    padding-bottom: 20px !important;
+    margin-bottom: 20px;
     border-width: 3px !important;
     border-radius: 20px !important;
 }
 
 .tryAgainButton:hover {
     background: #ffffff4e !important;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
 }
 
 /* .scenarioBtn {
