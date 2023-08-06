@@ -7,6 +7,7 @@ import nerd from '../assets/nerd.png';
 import Form from 'react-bootstrap/Form';
 import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
 import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
 
 export default function Questions() {
@@ -21,6 +22,7 @@ export default function Questions() {
     const [currentQuestion, setCurrentQuestion] = useState([0, 0]) // [index of question out of all questions, index of question within scenario]
     const [selectedAnswers, setSelectedAnswers] = useState(selectedAnswersStructure)
     const [selectedAnswer, setSelectedAnswer] = useState(null)
+    const navigate = useNavigate();
 
     function selectAnswer(event) {
         let answer = event.target.id;
@@ -30,7 +32,9 @@ export default function Questions() {
     function goToNextQuestion(event) {
         setSelectedAnswer(null)
         if (currentQuestion[0] == numQuestions - 1) {
-            // end of quiz
+            console.log(selectedAnswers);
+            // console.log(selectedAnswersStructure);
+            // navigate("/summary");
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
             setCurrentQuestion([currentQuestion[0] + 1, 0])
@@ -49,14 +53,14 @@ export default function Questions() {
         }   // User should not be able to call this function when they are on the first question
     }
 
-    return(
+    return (
         <div className="questionsPage">
             <div className='questionsHeader'>
                 <h1 className={`questionNavigation ${(currentScenario == 0 && currentQuestion[0] == 0) && 'hidden'}`} onClick={goToPreviousQuestion}><i class="bi bi-arrow-left-circle-fill"></i></h1>
-                    <div className='questionHeaderCentreColumn'>
-                        <div className="questionNumber">Question {currentQuestion[0]+1}/{numQuestions}</div>
-                        <h1 className='headerTitle'>Scenario {currentScenario+1}</h1>
-                    </div>
+                <div className='questionHeaderCentreColumn'>
+                    <div className="questionNumber">Question {currentQuestion[0] + 1}/{numQuestions}</div>
+                    <h1 className='headerTitle'>Scenario {currentScenario + 1}</h1>
+                </div>
                 <h1 className={`questionNavigation ${(currentQuestion[0] == numQuestions - 1) && 'hidden'}`} onClick={goToNextQuestion}><i class="bi bi-arrow-right-circle-fill"></i></h1>
             </div>
             <div className='content'>
@@ -71,26 +75,26 @@ export default function Questions() {
                     </Row>
                     <Row className='contentRow'>
                         <Col>
-                            <div className='questionTitle'>Question {currentQuestion[1]+1}</div>
+                            <div className='questionTitle'>Question {currentQuestion[1] + 1}</div>
                             <div className='questionText'>{scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].question}</div>
                         </Col>
                     </Row>
                     <Row className='contentRow'>
                         <Col>
-                        <div className='answersContainer'>
-                            <div className='answerPrompt'>Please select an answer:</div>
-                            <Form className='answers'>
-                                {scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].answers.map((answer, i) => 
+                            <div className='answersContainer'>
+                                <div className='answerPrompt'>Please select an answer:</div>
+                                <Form className='answers'>
+                                    {scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].answers.map((answer, i) =>
 
-                                    <div key={`answer-${i}`} className="mb-3 answer">
-                                        <Form.Check type="radio" id={`answer-${i}`} checked={selectedAnswer==`answer-${i}`} onChange={selectAnswer}/>
-                                        <div className='ms-3'>
-                                            {answer.answer}
+                                        <div key={`answer-${i}`} className="mb-3 answer">
+                                            <Form.Check type="radio" id={`answer-${i}`} checked={selectedAnswer == `answer-${i}`} onChange={selectAnswer} />
+                                            <div className='ms-3'>
+                                                {answer.answer}
+                                            </div>
                                         </div>
-                                    </div>
-                                )}
-                            </Form>
-                        </div>
+                                    )}
+                                </Form>
+                            </div>
                         </Col>
                     </Row>
                 </Container>
