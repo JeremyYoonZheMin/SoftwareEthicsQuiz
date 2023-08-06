@@ -3,7 +3,7 @@ import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
+import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/scenariosAndQuestions';
 
 function SummaryAndFeedback() {
     // TODO: get answers from other pg
@@ -20,7 +20,7 @@ function SummaryAndFeedback() {
         let score = 0;
         selectedAnswers.forEach(function (scenarioAns, scenario) {
             scenarioAns.forEach(function (ans, ques) {
-                score += scenariosAndQuestions[scenario].questions[ques].answers[ans].score;
+                score += SCENARIO_AND_QUESTIONS[scenario].questions[ques].answers[ans].score;
             });
         });
         return Math.round(score / maxScore);
@@ -40,17 +40,16 @@ function SummaryAndFeedback() {
         return stars;
     };
 
-    const handleClick = (questionNumber) => {
-        let numScenarios = 4;
-        let totalQuestions = 16;
-        let scenario = Math.ceil(questionNumber/numScenarios);
-        let question = totalQuestions - questionNumber;
+    const handleClick = (scenarioNum, quesNum, selectedAnswers) => {
+        let scenario = scenarioNum - 1;
+        let ques = quesNum - 1;
+        let ans = selectedAnswers[scenario][ques];
 
-        q = qByScenario * scenario
-
-        setFeedbackBoxTitle("Question " + questionNumber);
-        // setFeedbackBoxContent("content of " + questionNumber);
-        setFeedbackBoxContent(scenariosAndQuestions[scenario].questions[ques].answers[ans].score);
+        setFeedbackBoxTitle("Question " + quesNum);
+        // setFeedbackBoxContent(selectedAnswers[scenarioNum]);
+        // setFeedbackBoxContent(ans);
+        // setFeedbackBoxContent(SCENARIO_AND_QUESTIONS[scenario].questions[ques].question);
+        setFeedbackBoxContent(SCENARIO_AND_QUESTIONS[scenario].questions[ques].answers[ans].userFeedback);
     };
 
 
@@ -89,31 +88,31 @@ function SummaryAndFeedback() {
                         </Col>
                         <Col sm={4} className="questions-container">
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1)}>Question 1</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2)}>Question 2</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3)}>Question 3</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4)}>Question 4</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1,1,selectedAnswers)}>Question 1</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1,2,selectedAnswers)}>Question 2</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1,3,selectedAnswers)}>Question 3</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(1,4,selectedAnswers)}>Question 4</Button>
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(5)}>Question 5</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(6)}>Question 6</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(7)}>Question 7</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(8)}>Question 8</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2,1,selectedAnswers)}>Question 5</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2,2,selectedAnswers)}>Question 6</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2,3,selectedAnswers)}>Question 7</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(2,4,selectedAnswers)}>Question 8</Button>
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(9)}>Question 9</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(10)}>Question 10</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(11)}>Question 11</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(12)}>Question 12</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3,1,selectedAnswers)}>Question 9</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3,2,selectedAnswers)}>Question 10</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3,3,selectedAnswers)}>Question 11</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(3,4,selectedAnswers)}>Question 12</Button>
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(13)}>Question 13</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(14)}>Question 14</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(15)}>Question 15</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(16)}>Question 16</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4,1,selectedAnswers)}>Question 13</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4,2,selectedAnswers)}>Question 14</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4,3,selectedAnswers)}>Question 15</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => handleClick(4,4,selectedAnswers)}>Question 16</Button>
                             </Stack>
                         </Col>
                     </Row>
