@@ -30,7 +30,8 @@ export default function Questions() {
     }
 
     function goToNextQuestion(event) {
-        setSelectedAnswer(null)
+        selectedAnswers[currentScenario][currentQuestion[1]] = parseInt(selectedAnswer)
+        setSelectedAnswers(selectedAnswers)
         if (currentQuestion[0] == numQuestions - 1) {
             console.log(selectedAnswers);
             // console.log(selectedAnswersStructure);
@@ -38,18 +39,23 @@ export default function Questions() {
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
             setCurrentQuestion([currentQuestion[0] + 1, 0])
+            setSelectedAnswer(selectedAnswers[currentScenario+1][0])
         } else {
             setCurrentQuestion([currentQuestion[0] + 1, currentQuestion[1] + 1])
+            setSelectedAnswer(selectedAnswers[currentScenario][currentQuestion[1]+1])
         }
     }
 
     function goToPreviousQuestion(event) {
-        setSelectedAnswer(null)
+        selectedAnswers[currentScenario][currentQuestion[1]] = parseInt(selectedAnswer)
+        setSelectedAnswers(selectedAnswers)
         if (currentQuestion[1] != 0) {
             setCurrentQuestion([currentQuestion[0] - 1, currentQuestion[1] - 1])
+            setSelectedAnswer(selectedAnswers[currentScenario][currentQuestion[1]-1])
         } else {
             setCurrentScenario(currentScenario - 1)
             setCurrentQuestion([currentQuestion[0] - 1, scenariosAndQuestions[currentScenario].questions.length - 1])
+            setSelectedAnswer(selectedAnswers[currentScenario-1][scenariosAndQuestions[currentScenario].questions.length - 1])
         }   // User should not be able to call this function when they are on the first question
     }
 
@@ -86,15 +92,15 @@ export default function Questions() {
                                 <Form className='answers'>
                                     {scenariosAndQuestions[currentScenario].questions[currentQuestion[1]].answers.map((answer, i) =>
 
-                                        <div key={`answer-${i}`} className="mb-3 answer">
-                                            <Form.Check type="radio" id={`answer-${i}`} checked={selectedAnswer == `answer-${i}`} onChange={selectAnswer} />
-                                            <div className='ms-3'>
-                                                {answer.answer}
-                                            </div>
+                                    <div key={`${i}`} className="mb-3 answer">
+                                        <Form.Check type="radio" id={`${i}`} checked={selectedAnswer==`${i}`} onChange={selectAnswer}/>
+                                        <div className='ms-3'>
+                                            {answer.answer}
                                         </div>
-                                    )}
-                                </Form>
-                            </div>
+                                    </div>
+                                )}
+                            </Form>
+                        </div>
                         </Col>
                     </Row>
                 </Container>
