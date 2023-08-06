@@ -4,6 +4,7 @@ import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/scenariosAndQuestions';
+import { useNavigate as navigate } from "react-router-dom";
 
 function SummaryAndFeedback() {
     // TODO: get answers from other pg
@@ -15,15 +16,20 @@ function SummaryAndFeedback() {
     ];
     let maxScore = 16 * 4;
 
+    const getScoreOutOfFive = (totalScore, maxScore) => {
+        return Math.round((totalScore / maxScore) * 5);
+        // return score;
+    };
 
-    const getScore = (selectedAnswers, maxScore) => {
+    const getScore = (selectedAnswers) => {
         let score = 0;
         selectedAnswers.forEach(function (scenarioAns, scenario) {
             scenarioAns.forEach(function (ans, ques) {
                 score += SCENARIO_AND_QUESTIONS[scenario].questions[ques].answers[ans].score;
             });
         });
-        return Math.round(score / maxScore);
+
+        return score;
         // return score;
     };
 
@@ -79,14 +85,14 @@ function SummaryAndFeedback() {
         );
     };
 
-
-    let score = getScore(selectedAnswers, maxScore);
+    let totalScore = getScore(selectedAnswers);
+    let score = getScoreOutOfFive(totalScore, maxScore);
 
 
     const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Good Try!");
     // const [feedbackBoxContent, setFeedbackBoxContent] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem cursus, convallis ex in, rutrum lorem. Curabitur efficitur ante ac congue sodales. Mauris varius ac sapien sit amet fermentum. Morbi quis dui efficitur mauris ultrices ullamcorper in quis nibh. Nulla dignissim eu ex at imperdiet. Maecenas sollicitudin venenatis ex ut porttitor. Vestibulum eget sodales sapien, sed vehicula orci. Nunc vel augue vitae orci vestibulum molestie. Sed dapibus urna sed facilisis sagittis.");
     const stars = useState(getStars(score));
-    const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>{score}</p>);
+    const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>You scored {Math.round((totalScore / maxScore) * 100)}%</p>);
 
 
     return (
@@ -108,7 +114,7 @@ function SummaryAndFeedback() {
                                     </div>
                                 </div>
                             </Stack>
-                            <Button variant='outline-light' className="tryAgainButton">Try Again</Button>
+                            <a href="/" class="btn btn-outline-light btn-lg tryAgainButton" role="button">Try Again</a>
                         </Col>
                         <Col sm={4} className="questions-container">
                             <Stack gap={1}>
