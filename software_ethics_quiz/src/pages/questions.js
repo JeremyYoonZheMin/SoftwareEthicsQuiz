@@ -31,13 +31,13 @@ export default function Questions({setFinalSelectedAnswers}) {
     }
 
     function goToNextQuestion(event) {
+        console.log(allQuestionsAnswered())
         selectedAnswers[currentScenario][currentQuestion[1]] = parseInt(selectedAnswer)
         setSelectedAnswers(selectedAnswers)
         if (currentQuestion[0] == numQuestions - 1) {
             console.log(selectedAnswers);
             setFinalSelectedAnswers(selectedAnswers)
             navigate('/summary');
-            // navigate("/summary");
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
             setCurrentQuestion([currentQuestion[0] + 1, 0])
@@ -59,6 +59,15 @@ export default function Questions({setFinalSelectedAnswers}) {
             setCurrentQuestion([currentQuestion[0] - 1, scenariosAndQuestions[currentScenario].questions.length - 1])
             setSelectedAnswer(selectedAnswers[currentScenario-1][scenariosAndQuestions[currentScenario].questions.length - 1])
         }   // User should not be able to call this function when they are on the first question
+    }
+
+    function allQuestionsAnswered(event) {
+        for (let question of selectedAnswers.flat(1)) {
+            if (isNaN(question)) {
+                return false
+            }
+        }
+        return true
     }
 
     return (
@@ -107,7 +116,14 @@ export default function Questions({setFinalSelectedAnswers}) {
                     </Row>
                 </Container>
                 <div className='continueButtonContainer my-5'>
-                    <Button variant='outline-light' size='lg' className='continueButton' onClick={goToNextQuestion}>Continue</Button>
+                    {
+                        currentQuestion[0] == numQuestions - 1 ?
+                        (<div>
+                            <Button variant='outline-light' size='lg' className='continueButton' onClick={goToNextQuestion} disabled={!allQuestionsAnswered()}>Finish</Button>
+                            {!allQuestionsAnswered() && (<p className='warningText'>Please answer all questions</p>)}
+                        </div>) :
+                        (<Button variant='outline-light' size='lg' className='continueButton' onClick={goToNextQuestion}>Continue</Button>)
+                    }
                 </div>
             </div>
         </div>
