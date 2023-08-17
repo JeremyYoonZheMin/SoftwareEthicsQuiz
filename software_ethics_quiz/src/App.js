@@ -11,6 +11,29 @@ function App() {
 
     const [selectedAnswers, setSelectedAnswers] = useState(null);
 
+    // test mongodb post
+    /*const answer = [
+        [1, 2, 3, 4],
+        [3, 2, 4, 1],
+        [2, 3, 4, 1],
+        [1, 2, 3, 4]
+    ];
+ 
+    async function insert() {
+    await fetch("http://localhost:5050/answer", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(answer),
+    }).catch(e => {
+        console.error(e);
+        return;
+    });
+    }
+
+    insert();*/
+
     return (
         <main className="App">
             <Router>
