@@ -8,4 +8,4 @@ In the terminal, change directory to ./server and run the following
 npm install mongodb express cors dotenv
 ```
 
-In the `.env` file, make sure to change <password> in `ATLAS_URI` to the db password.
+In the `.env` file, make sure to change `<password>` in `ATLAS_URI` to the db password.
