@@ -4,17 +4,20 @@ import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/scenariosAndQuestions';
-import { useNavigate as navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-function SummaryAndFeedback() {
+function SummaryAndFeedback({selectedAnswers}) {
     // TODO: get answers from other pg
-    let selectedAnswers = [
-        [3, 2, 3, 3],
-        [3, 3, 3, 3],
-        [3, 3, 3, 3],
-        [3, 3, 3, 3]
-    ];
-    let maxScore = 16 * 4;
+    // let selectedAnswers = [
+    //     [3, 2, 3, 3],
+    //     [3, 3, 3, 3],
+    //     [3, 3, 3, 3],
+    //     [3, 3, 3, 3]
+    // ];
+
+    // return;
+
+    const navigate = useNavigate();
 
     const getScoreOutOfFive = (totalScore, maxScore) => {
         return Math.round((totalScore / maxScore) * 5);
@@ -25,7 +28,7 @@ function SummaryAndFeedback() {
         let score = 0;
         selectedAnswers.forEach(function (scenarioAns, scenario) {
             scenarioAns.forEach(function (ans, ques) {
-                score += SCENARIO_AND_QUESTIONS[scenario].questions[ques].answers[ans].score;
+                score += SCENARIO_AND_QUESTIONS[scenario]?.questions[ques]?.answers[ans]?.score ?? 0;
             });
         });
 
@@ -85,14 +88,28 @@ function SummaryAndFeedback() {
         );
     };
 
-    let totalScore = getScore(selectedAnswers);
-    let score = getScoreOutOfFive(totalScore, maxScore);
+    // let selectedAnswers = useLocation().state;
 
+    // const { state: { selectedAnswers } = {} } = useLocation();
+    console.log(selectedAnswers);
+    let totalScore = 0;
+    let score = 0;
+    let maxScore = 16 * 4;
+
+    if (selectedAnswers !== null) {
+        totalScore = getScore(selectedAnswers);
+        score = getScoreOutOfFive(totalScore, maxScore);
+    } else {
+        console.log('a');
+        navigate('/');
+    };
 
     const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Good Try!");
     // const [feedbackBoxContent, setFeedbackBoxContent] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem cursus, convallis ex in, rutrum lorem. Curabitur efficitur ante ac congue sodales. Mauris varius ac sapien sit amet fermentum. Morbi quis dui efficitur mauris ultrices ullamcorper in quis nibh. Nulla dignissim eu ex at imperdiet. Maecenas sollicitudin venenatis ex ut porttitor. Vestibulum eget sodales sapien, sed vehicula orci. Nunc vel augue vitae orci vestibulum molestie. Sed dapibus urna sed facilisis sagittis.");
     const stars = useState(getStars(score));
     const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>You scored {Math.round((totalScore / maxScore) * 100)}%</p>);
+
+
 
 
     return (

@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
 
-export default function Questions() {
+export default function Questions({setFinalSelectedAnswers}) {
 
     let numQuestions = scenariosAndQuestions.reduce((numQuestions, scenario) => numQuestions + scenario.questions.length, 0)
     let selectedAnswersStructure = Array(scenariosAndQuestions.length)
@@ -22,6 +22,7 @@ export default function Questions() {
     const [currentQuestion, setCurrentQuestion] = useState([0, 0]) // [index of question out of all questions, index of question within scenario]
     const [selectedAnswers, setSelectedAnswers] = useState(selectedAnswersStructure)
     const [selectedAnswer, setSelectedAnswer] = useState(null)
+
     const navigate = useNavigate();
 
     function selectAnswer(event) {
@@ -34,7 +35,8 @@ export default function Questions() {
         setSelectedAnswers(selectedAnswers)
         if (currentQuestion[0] == numQuestions - 1) {
             console.log(selectedAnswers);
-            // console.log(selectedAnswersStructure);
+            setFinalSelectedAnswers(selectedAnswers)
+            navigate('/summary');
             // navigate("/summary");
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
