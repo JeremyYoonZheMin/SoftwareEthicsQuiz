@@ -64,7 +64,7 @@ export default function Questions({setFinalSelectedAnswers}) {
 
     // Post answers to database
     async function insert() {
-        await fetch("http://localhost:5050/answer", {
+        await fetch("https://softwareethicsquiz-api.onrender.com/answer", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
