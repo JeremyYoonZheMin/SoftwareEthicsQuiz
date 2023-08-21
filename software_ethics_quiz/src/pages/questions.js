@@ -37,6 +37,7 @@ export default function Questions({setFinalSelectedAnswers}) {
         if (currentQuestion[0] == numQuestions - 1) {
             console.log(selectedAnswers);
             setFinalSelectedAnswers(selectedAnswers)
+            insert();
             navigate('/summary');
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
@@ -59,6 +60,20 @@ export default function Questions({setFinalSelectedAnswers}) {
             setCurrentQuestion([currentQuestion[0] - 1, scenariosAndQuestions[currentScenario].questions.length - 1])
             setSelectedAnswer(selectedAnswers[currentScenario-1][scenariosAndQuestions[currentScenario].questions.length - 1])
         }   // User should not be able to call this function when they are on the first question
+    }
+
+    // Post answers to database
+    async function insert() {
+        await fetch("http://localhost:5050/answer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(selectedAnswers),
+        }).catch(e => {
+            console.error(e);
+            return;
+        });
     }
 
     function allQuestionsAnswered(event) {
