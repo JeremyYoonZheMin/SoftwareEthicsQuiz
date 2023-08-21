@@ -36,9 +36,9 @@ function App() {
 
     return (
         <main className="App">
-            <Router>
+            <Router basename={process.env.PUBLIC_URL}>
                 <Routes>
-                    <Route path='' exact element={<Landing />} />
+                    <Route path='/' exact element={<Landing />} />
                     <Route path='/terms' exact element={<Terms />} />
                     <Route path='/questions' exact element={<Questions setFinalSelectedAnswers={setSelectedAnswers}/>}/>
 
