@@ -106,3 +106,58 @@
 .feedbackBoxBtn {
     margin: 5px;
 }
+
+.headerTitle {
+    font-size: 60px;
+}
+
+@media all and (max-width: 768px) {
+    .feedback-container {
+        padding-right: 0px;
+    }
+    .headerTitle {
+        font-size: 40px;
+    }
+    .feedbackBoxTitle {
+        font-size: 30px;
+    }
+    .tryAgainButton {
+        width: 200px;
+        height: 60px;
+        font-size: 25px !important;
+        margin-bottom: 20px;
+        border-width: 3px !important;
+        border-radius: 20px !important;
+    }
+    .questionButton {
+        width: 180px;
+        height: 60px;
+        font-size: 25px !important;
+        padding-bottom: 20px !important;
+        border-width: 3px !important;
+        border-radius: 20px !important;
+    }
+    .feedbackBox, .feedbackBoxQuestionBox {
+        font-size: 15px;
+        padding: 20px 10px 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .feedbackBox .star {
+        /* color: #bbb0a8; */
+        margin: 5px;
+    }
+    .feedbackBoxInnerTitle {
+        font-weight: bold;
+        text-align: left;
+        font-size: 20px;
+    }
+    .summaryAndFeedbackHeader {
+        width: 100%;
+        top: 0;
+        color: #ffffff;
+        padding: 10px 24px 10px 10px;
+        text-align: center;
+    }
+}
