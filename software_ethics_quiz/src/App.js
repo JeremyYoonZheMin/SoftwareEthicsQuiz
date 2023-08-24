@@ -5,7 +5,7 @@ import SummaryAndFeedback from "./pages/summaryAndFeedback";
 import Questions from '../src/pages/questions';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from "react";
-import { scenariosAndQuestions } from './constants/scenariosAndQuestions';
+import Role from "./pages/role";
 
 function App() {
 
@@ -40,6 +40,7 @@ function App() {
                 <Routes>
                     <Route path='/' exact element={<Landing />} />
                     <Route path='/terms' exact element={<Terms />} />
+                    <Route path='/role' exact element={<Role />} />
                     <Route path='/questions' exact element={<Questions setFinalSelectedAnswers={setSelectedAnswers}/>}/>
 
                     <Route

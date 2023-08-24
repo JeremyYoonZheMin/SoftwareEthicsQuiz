@@ -14,7 +14,7 @@ export default function Terms() {
 
     const navigate = useNavigate();
     function routeChange() {
-        const path = "/questions";
+        const path = "/role";
         navigate(path);
     }
 
