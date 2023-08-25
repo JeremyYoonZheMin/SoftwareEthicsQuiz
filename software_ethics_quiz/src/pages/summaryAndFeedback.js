@@ -110,7 +110,7 @@ function SummaryAndFeedback({selectedAnswers}) {
     const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>You scored {Math.round((totalScore / maxScore) * 100)}%</p>);
 
     function tryAgain() {
-        const path = "/";
+        const path = "/questions";
         navigate(path);
     }
 
