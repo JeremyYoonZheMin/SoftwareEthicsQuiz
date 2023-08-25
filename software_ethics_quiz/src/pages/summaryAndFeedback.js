@@ -109,7 +109,10 @@ function SummaryAndFeedback({selectedAnswers}) {
     const stars = useState(getStars(score));
     const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>You scored {Math.round((totalScore / maxScore) * 100)}%</p>);
 
-
+    function tryAgain() {
+        const path = "/";
+        navigate(path);
+    }
 
 
     return (
@@ -131,7 +134,7 @@ function SummaryAndFeedback({selectedAnswers}) {
                                     </div>
                                 </div>
                             </Stack>
-                            <a href="/" class="btn btn-outline-light btn-lg tryAgainButton" role="button">Try Again</a>
+                            <button href="/" class="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
                         </Col>
                         <Col sm={4} className="questions-container">
                             <Stack gap={1}>
