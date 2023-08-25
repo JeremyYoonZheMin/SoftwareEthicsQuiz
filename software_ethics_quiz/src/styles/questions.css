@@ -14,7 +14,7 @@
     border-bottom-right-radius: 100% 170%;
     border-bottom-left-radius: 100% 170%;
     width: 106%;
-    position: fixed;
+    position: absolute;
     left: -3%;
     color: #FFFFFF;
     text-align: center;
@@ -147,4 +147,79 @@
     text-align: center;
     font-weight: bold;
     font-size: large;
+}
+
+@media all and (max-width: 768px) {
+    .questionsPage {
+        height: 100%;
+        width: 100%;
+        padding-bottom: 100px;
+        background-image: url("../assets/landingBackground.png");
+        background-attachment: scroll;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .questionsHeader {
+        height: 125px;
+    }
+
+    .content {
+        padding-top: 145px;
+    }
+
+    .contentContainer {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+
+    .scenarioText {
+        padding: 20px 10px 20px 20px;
+        border-radius: 20px;
+        font-size: 1.2em;
+    }
+
+    .scenarioTextColumn {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+   
+    .questionTitle {
+        font-size: 3em;
+        left: 0px;
+    }
+    .questionText {
+        padding: 50px 10px 30px 20px;
+        margin: 99px 10px 60px 0px;
+        font-size: 1.2em;
+    }
+
+    .answerPrompt {
+        font-size: 1.5em;
+        padding-bottom: 20px;
+    }
+
+    .answersContainer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .answers {
+        font-size: 1.2em;
+    }
+
+    .navigationButtonContainer {
+        margin-top: 30px;
+    }
+
+    .navigationButton {
+        width: 40vw;
+        height: auto;
+        padding-bottom: 6px !important;
+        border-width: 3px !important;
+        border-radius: 20px !important;
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 1.5em !important;
+    }
 }

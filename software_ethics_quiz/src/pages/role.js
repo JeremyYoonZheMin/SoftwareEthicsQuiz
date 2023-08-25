@@ -47,9 +47,9 @@ export default function Role() {
                         </Col>
                     </Row>
                 </Container>
-                <div className='continueButtonContainer my-5'>
+                <div className='navigationButtonContainer my-5'>
                     <div>
-                        <Button variant='outline-light' size='lg' className='continueButton' onClick={routeChange}
+                        <Button variant='outline-light' size='lg' className='navigationButton' onClick={routeChange}
                                 disabled={(selectedAnswer == null)}>Start</Button>
                     </div>
                 </div>

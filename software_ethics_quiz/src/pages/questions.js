@@ -22,6 +22,7 @@ export default function Questions({setFinalSelectedAnswers}) {
     const [currentQuestion, setCurrentQuestion] = useState([0, 0]) // [index of question out of all questions, index of question within scenario]
     const [selectedAnswers, setSelectedAnswers] = useState(selectedAnswersStructure)
     const [selectedAnswer, setSelectedAnswer] = useState(null)
+    const smallScreen = window.matchMedia("(max-width: 768px)").matches
 
     const navigate = useNavigate();
 
@@ -98,9 +99,9 @@ export default function Questions({setFinalSelectedAnswers}) {
             <div className='content'>
                 <Container fluid className='contentContainer'>
                     <Row className='contentRow'>
-                        <Col xs={4} className='d-flex align-items-center'>
+                        {!smallScreen && (<Col xs={4} className='d-flex align-items-center'>
                             <img src={nerd} alt='Person on laptop' className='img-fluid nerd'></img>
-                        </Col>
+                        </Col>)}
                         <Col className='scenarioTextColumn'>
                             <div className='scenarioText'>{scenariosAndQuestions[currentScenario].scenario}</div>
                         </Col>
@@ -131,7 +132,7 @@ export default function Questions({setFinalSelectedAnswers}) {
                     </Row>
                 </Container>
                 <div className='navigationButtons'>
-                    {(currentQuestion[0] > 0) && (<div className='navigationButtonContainer my-5'>
+                    {(currentQuestion[0] > 0) && (<div className={`navigationButtonContainer ${!smallScreen && 'my-5'}`}>
                         <Button variant='outline-light' size='lg' className='navigationButton' onClick={goToPreviousQuestion}>Previous</Button>
                     </div>)}
                     <div className='navigationButtonContainer my-5'>
