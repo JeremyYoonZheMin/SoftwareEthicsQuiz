@@ -88,12 +88,12 @@ export default function Questions({setFinalSelectedAnswers}) {
     return (
         <div className="questionsPage">
             <div className='questionsHeader'>
-                <h1 className={`questionNavigation ${(currentScenario == 0 && currentQuestion[0] == 0) && 'hidden'}`} onClick={goToPreviousQuestion}><i class="bi bi-arrow-left-circle-fill"></i></h1>
+                {/* <h1 className={`questionNavigation ${(currentScenario == 0 && currentQuestion[0] == 0) && 'hidden'}`} onClick={goToPreviousQuestion}><i class="bi bi-arrow-left-circle-fill"></i></h1> */}
                 <div className='questionHeaderCentreColumn'>
                     <div className="questionNumber">Question {currentQuestion[0] + 1}/{numQuestions}</div>
                     <h1 className='headerTitle'>Scenario {currentScenario + 1}</h1>
                 </div>
-                <h1 className={`questionNavigation ${(currentQuestion[0] == numQuestions - 1) && 'hidden'}`} onClick={goToNextQuestion}><i class="bi bi-arrow-right-circle-fill"></i></h1>
+                {/* <h1 className={`questionNavigation ${(currentQuestion[0] == numQuestions - 1) && 'hidden'}`} onClick={goToNextQuestion}><i class="bi bi-arrow-right-circle-fill"></i></h1> */}
             </div>
             <div className='content'>
                 <Container fluid className='contentContainer'>
@@ -130,15 +130,20 @@ export default function Questions({setFinalSelectedAnswers}) {
                         </Col>
                     </Row>
                 </Container>
-                <div className='continueButtonContainer my-5'>
-                    {
-                        currentQuestion[0] == numQuestions - 1 ?
-                        (<div>
-                            <Button variant='outline-light' size='lg' className='continueButton' onClick={goToNextQuestion} disabled={!allQuestionsAnswered()}>Finish</Button>
-                            {!allQuestionsAnswered() && (<p className='warningText'>Please answer all questions</p>)}
-                        </div>) :
-                        (<Button variant='outline-light' size='lg' className='continueButton' onClick={goToNextQuestion}>Continue</Button>)
-                    }
+                <div className='navigationButtons'>
+                    {(currentQuestion[0] > 0) && (<div className='navigationButtonContainer my-5'>
+                        <Button variant='outline-light' size='lg' className='navigationButton' onClick={goToPreviousQuestion}>Previous</Button>
+                    </div>)}
+                    <div className='navigationButtonContainer my-5'>
+                        {
+                            currentQuestion[0] == numQuestions - 1 ?
+                            (<div>
+                                <Button variant='outline-light' size='lg' className='navigationButton' onClick={goToNextQuestion} disabled={!selectedAnswer}>Finish</Button>
+                                {/* {!allQuestionsAnswered() && (<p className='warningText'>Please answer all questions</p>)} */}
+                            </div>) :
+                            (<Button variant='outline-light' size='lg' className='navigationButton' onClick={goToNextQuestion} disabled={!selectedAnswer}>Continue</Button>)
+                        }
+                    </div>
                 </div>
             </div>
         </div>
