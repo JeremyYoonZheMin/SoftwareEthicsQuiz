@@ -61,6 +61,7 @@
 
 .nerd {
     padding: 0px 50px 0px 50px;
+    width: 80%;
 }
 
 .scenarioTextColumn {
@@ -76,11 +77,11 @@
 }
 
 .questionTitle {
-    font-size: 99px;
+    font-size: 5em;
     font-weight: bold;
     color: #000000;
     position: relative;
-    top: 159px;
+    top: 128px;
     left: 190px;
     z-index: 1;
     margin-top: -100px;
@@ -91,8 +92,8 @@
     background-color: #FFFFFF;
     opacity: 0.75;
     font-size: 24px;
-    padding: 120px 50px 50px 100px;
-    margin: 100px 100px 100px 100px;
+    padding: 80px 50px 50px 100px;
+    margin: 80px 100px 60px 100px;
     border-radius: 20px;
 }
 
@@ -132,8 +133,8 @@
     padding-bottom: 20px !important;
     border-width: 3px !important;
     border-radius: 20px !important;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .navigationButton:hover {
