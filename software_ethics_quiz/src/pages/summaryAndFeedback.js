@@ -66,6 +66,8 @@ function SummaryAndFeedback({selectedAnswers}) {
     const setQuestionFeedback = (scenarioNum, quesNum, selectedAnswers) => {
         setFeedbackBoxTitle("Question " + quesNum);
 
+        quesNum = quesNum % 4 === 0 ? 4 : quesNum % 4;
+
         let ans = selectedAnswers[scenarioNum - 1][quesNum - 1];
         let quesFeedback = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers[ans].userFeedback;
         let question = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].question;
@@ -100,7 +102,7 @@ function SummaryAndFeedback({selectedAnswers}) {
         totalScore = getScore(selectedAnswers);
         score = getScoreOutOfFive(totalScore, maxScore);
     } else {
-        console.log('a');
+        console.log('null answers');
         navigate('/');
     };
 
@@ -145,24 +147,24 @@ function SummaryAndFeedback({selectedAnswers}) {
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 1, selectedAnswers)}>Question 5</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 2, selectedAnswers)}>Question 6</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 3, selectedAnswers)}>Question 7</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 4, selectedAnswers)}>Question 8</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 5, selectedAnswers)}>Question 5</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 6, selectedAnswers)}>Question 6</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 7, selectedAnswers)}>Question 7</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 8, selectedAnswers)}>Question 8</Button>
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 1, selectedAnswers)}>Question 9</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 2, selectedAnswers)}>Question 10</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 3, selectedAnswers)}>Question 11</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 4, selectedAnswers)}>Question 12</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 9, selectedAnswers)}>Question 9</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 10, selectedAnswers)}>Question 10</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 11, selectedAnswers)}>Question 11</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 12, selectedAnswers)}>Question 12</Button>
                             </Stack>
                             <br />
                             <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 1, selectedAnswers)}>Question 13</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 2, selectedAnswers)}>Question 14</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 3, selectedAnswers)}>Question 15</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 4, selectedAnswers)}>Question 16</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 13, selectedAnswers)}>Question 13</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 14, selectedAnswers)}>Question 14</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 15, selectedAnswers)}>Question 15</Button>
+                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 16, selectedAnswers)}>Question 16</Button>
                             </Stack>
                         </Col>
                     </Row>
