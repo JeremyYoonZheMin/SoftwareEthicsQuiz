@@ -20,11 +20,6 @@ export default function Landing() {
                         </div>
                     </Row>
                     <Row>
-                        <div className='landingSubtitle'>
-                            How Ethical Are You?
-                        </div>
-                    </Row>
-                    <Row>
                         <div className='startButtonContainer'>
                             <Button
                                 variant='outline-light'
