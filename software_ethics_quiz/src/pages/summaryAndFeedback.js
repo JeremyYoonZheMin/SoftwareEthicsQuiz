@@ -4,11 +4,11 @@ import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/scenariosAndQuestions';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SummaryAndFeedback({selectedAnswers}) {
     // TODO: get answers from other pg
-    // let selectedAnswers = [
+    // selectedAnswers = [
     //     [3, 2, 3, 3],
     //     [3, 3, 3, 3],
     //     [3, 3, 3, 3],
@@ -63,25 +63,75 @@ function SummaryAndFeedback({selectedAnswers}) {
         );
     };
 
+    const getBestAnswer = (scenarioNum, quesNum) => {
+        let bestAnsScore = Number.MIN_VALUE;
+        let bestAns;
+        let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
+        
+        for (let i=0; i<answers.length; i++) {
+            if (answers[i].score > bestAnsScore) {
+                bestAnsScore = answers[i].score;
+                bestAns = answers[i];
+            }
+        }
+        return bestAns;
+    }
+
+    const getAllAnswers = (scenarioNum, quesNum) => {
+        let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
+        let answerList = [];
+        for (let i=0; i<answers.length; i++) {
+            answerList[i] = answers[i].answer;
+        }
+        return answerList;
+    }
+
     const setQuestionFeedback = (scenarioNum, quesNum, selectedAnswers) => {
         setFeedbackBoxTitle("Question " + quesNum);
 
         let ans = selectedAnswers[scenarioNum - 1][quesNum - 1];
         let quesFeedback = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers[ans].userFeedback;
         let question = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].question;
+        let selectedAns = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers[ans].answer;
+        let bestAns = getBestAnswer(scenarioNum, quesNum);
+        let answers = getAllAnswers(scenarioNum, quesNum);
+        
 
         // setFeedbackBoxContent(selectedAnswers[scenarioNum]);
         // setFeedbackBoxContent(ans);
         // setFeedbackBoxContent(SCENARIO_AND_QUESTIONS[scenario].questions[ques].question);
         setFeedbackBoxContent(
             <div className="feedbackBoxQuestionBoxGroup">
+                <p>{question}</p>
+                <p className='feedbackBoxInnerTitle'>Answers</p>
+                <div className="feedbackBoxQuestionBox">
+                    <p>
+                        {answers[0]}
+                    </p>
+                    <p>
+                        {answers[1]}
+                    </p>
+                    <p>
+                        {answers[2]}
+                    </p>
+                    <p>
+                        {answers[3]}
+                    </p>
+                </div>
                 <p className='feedbackBoxInnerTitle'>You Selected</p>
                 <div className="feedbackBoxQuestionBox">
                     <p>
-                        {question}
+                        {selectedAns}
                     </p>
                 </div>
                 <p>{quesFeedback}</p>
+                <p className='feedbackBoxInnerTitle'>Best Answer</p>
+                <div className="feedbackBoxQuestionBox">
+                    <p>
+                        {bestAns.answer}
+                    </p>
+                </div>
+                <p>{bestAns.userFeedback}</p>
                 <button type="button" class="btn btn-outline-dark feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, selectedAnswers)}>Scenario</button>
                 <button type="button" class="btn btn-outline-dark active feedbackBoxBtn" id='questionBtn'>Question</button>
             </div>
@@ -104,10 +154,31 @@ function SummaryAndFeedback({selectedAnswers}) {
         navigate('/');
     };
 
-    const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Good Try!");
+    const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Question");
     // const [feedbackBoxContent, setFeedbackBoxContent] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem cursus, convallis ex in, rutrum lorem. Curabitur efficitur ante ac congue sodales. Mauris varius ac sapien sit amet fermentum. Morbi quis dui efficitur mauris ultrices ullamcorper in quis nibh. Nulla dignissim eu ex at imperdiet. Maecenas sollicitudin venenatis ex ut porttitor. Vestibulum eget sodales sapien, sed vehicula orci. Nunc vel augue vitae orci vestibulum molestie. Sed dapibus urna sed facilisis sagittis.");
     const stars = useState(getStars(score));
-    const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>You scored {Math.round((totalScore / maxScore) * 100)}%</p>);
+    const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>Select a question to view your results</p>);
+
+    let overallFeedbackTitle = "";
+    let overallFeedbackContent = "";
+    let overallScore = Math.round((totalScore / maxScore) * 100);
+
+    if (overallScore >= 0 && overallScore <= 25) {
+        overallFeedbackTitle = "Unsatisfactory Attempt"; 
+        overallFeedbackContent = "There is much room for improvement"
+    }
+    else if (overallScore >= 26 && overallScore <= 50) {
+        overallFeedbackTitle = "Satisfactory Attempt"; 
+        overallFeedbackContent = "With a little more knowledge, you can become a software ethics expert";
+    }
+    else if (overallScore >= 51 && overallScore <= 75) {
+        overallFeedbackTitle = "Very Good Attempt"; 
+        overallFeedbackContent = "You are on track to becoming a software ethics expert.";
+    }
+    else if (overallScore >= 51 && overallScore <= 75) {
+        overallFeedbackTitle = "Excellent Attempt"; 
+        overallFeedbackContent = "Congratulations! You are a software ethics expert.";
+    }
 
     function tryAgain() {
         const path = "/questions";
@@ -126,10 +197,17 @@ function SummaryAndFeedback({selectedAnswers}) {
                     <Row>
                         <Col sm={8} className="feedback-container ">
                             <Stack gap={3} justify-content-center>
+                            <div>
+                                    <h2 className='feedbackBoxTitle'>{overallFeedbackTitle}</h2>
+                                    <div className="feedbackBox">
+                                        {stars}
+                                        <p>You scored {overallScore}%</p>
+                                        {overallFeedbackContent}
+                                    </div>
+                                </div>
                                 <div>
                                     <h2 className='feedbackBoxTitle'>{feedbackBoxTitle}</h2>
                                     <div className="feedbackBox">
-                                        {stars}
                                         {feedbackBoxContent}
                                     </div>
                                 </div>
