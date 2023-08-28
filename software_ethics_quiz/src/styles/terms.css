@@ -14,15 +14,16 @@
 .frameContainer {
     height: 50vh;
     margin: 0 auto;
-    width: 70%;
+    width: 75%;
 }
 .frame {
     display: block;
     margin: auto;
     text-align: center;
-    width: 100%;
+    width: 75%;
     height: 100%;
     background: #FFFFFF;
+    border-radius: 15px;
 }
 .checkbox {
     padding-top: 30px;
