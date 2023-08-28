@@ -7,8 +7,6 @@ import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/sc
 import { useNavigate } from "react-router-dom";
 
 function SummaryAndFeedback({responses}) {
-
-    console.log("Responses: ", responses);
     // TODO: get answers from other pg
     // responses = {
     //    profession: "IT Student",
