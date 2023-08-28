@@ -49,7 +49,7 @@ function App() {
                     <Route path='/' exact element={<Landing />} />
                     <Route path='/terms' exact element={<Terms />} />
                     <Route path='/role' exact element={<Role setProfession={setProfession}/>} />
-                    <Route path='/questions' exact element={<Questions setFinalSelectedAnswers={setSelectedAnswers}/>}/>
+                    <Route path='/questions' exact element={<Questions responses={responses} setFinalSelectedAnswers={setSelectedAnswers}/>}/>
 
                     <Route
                         exact

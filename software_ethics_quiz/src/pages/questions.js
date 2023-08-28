@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
 
-export default function Questions({setFinalSelectedAnswers}) {
+export default function Questions({responses, setFinalSelectedAnswers}) {
 
     let numQuestions = scenariosAndQuestions.reduce((numQuestions, scenario) => numQuestions + scenario.questions.length, 0)
     let selectedAnswersStructure = Array(scenariosAndQuestions.length)
@@ -70,7 +70,7 @@ export default function Questions({setFinalSelectedAnswers}) {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(selectedAnswers),
+            body: JSON.stringify(responses),
         }).catch(e => {
             console.error(e);
             return;
