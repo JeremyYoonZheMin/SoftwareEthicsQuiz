@@ -132,7 +132,7 @@ export default function Questions({responses, setFinalSelectedAnswers}) {
                     </Row>
                 </Container>
                 <div className='navigationButtons'>
-                    {(currentQuestion[0] > 0) && (<div className={`navigationButtonContainer ${!smallScreen && 'my-5'}`}>
+                    {(currentQuestion[0] > 0) && (<div className={`navigationButtonContainer my-5`}>
                         <Button variant='outline-light' size='lg' className='navigationButton' onClick={goToPreviousQuestion}>Previous</Button>
                     </div>)}
                     <div className='navigationButtonContainer my-5'>
