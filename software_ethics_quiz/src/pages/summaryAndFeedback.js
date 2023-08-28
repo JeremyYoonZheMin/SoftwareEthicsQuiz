@@ -6,7 +6,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/scenariosAndQuestions';
 import { useNavigate } from "react-router-dom";
 
-function SummaryAndFeedback({selectedAnswers}) {
+function SummaryAndFeedback({responses}) {
     // TODO: get answers from other pg
     // selectedAnswers = [
     //     [3, 2, 3, 3],
