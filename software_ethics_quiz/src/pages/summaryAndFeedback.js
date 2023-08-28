@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 import '../styles/summaryAndFeedback.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,10 @@ import { scenariosAndQuestions as SCENARIO_AND_QUESTIONS } from '../constants/sc
 import { useNavigate } from "react-router-dom";
 
 function SummaryAndFeedback({responses}) {
+    useEffect(() => {
+        console.log("I fire once");
+        insert();
+    }, []);
     // TODO: get answers from other pg
     // responses = {
     //    profession: "IT Student",
@@ -24,6 +28,19 @@ function SummaryAndFeedback({responses}) {
         return Math.round((totalScore / maxScore) * 5);
         // return score;
     };
+
+    async function insert() {
+        await fetch("https://softwareethicsquiz-api.onrender.com/answer", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(responses),
+        }).catch(e => {
+            console.error(e);
+            return;
+        });
+    }
 
     const getScore = (selectedAnswers) => {
         let score = 0;
