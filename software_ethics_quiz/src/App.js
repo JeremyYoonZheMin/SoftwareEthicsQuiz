@@ -10,6 +10,7 @@ import Role from "./pages/role";
 function App() {
 
     const [selectedAnswers, setSelectedAnswers] = useState(null);
+    const [responses, setResponses] = useState({'profession': null, 'answers': selectedAnswers});
 
     // test mongodb post
     /*const answer = [
@@ -46,7 +47,7 @@ function App() {
                     <Route
                         exact
                         path="/summary"
-                        element={selectedAnswers ? <SummaryAndFeedback selectedAnswers={selectedAnswers}/> : <Navigate replace to={"/"} />}
+                        element={selectedAnswers ? <SummaryAndFeedback responses={responses}/> : <Navigate replace to={"/"} />}
                     />
                     {/* <Route path='/summary' exact element={<SummaryAndFeedback />} /> */}
                 </Routes>
