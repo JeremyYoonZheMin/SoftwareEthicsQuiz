@@ -7,7 +7,7 @@ import {useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from "react-router-dom";
 
-export default function Role() {
+export default function Role({setProfession}) {
 
     const [selectedAnswer, setSelectedAnswer] = useState(null)
     const navigate = useNavigate();
@@ -20,6 +20,7 @@ export default function Role() {
     }
 
     function routeChange() {
+        setProfession(selectedAnswer)
         const path = "/questions";
         navigate(path);
     }

@@ -9,8 +9,15 @@ import Role from "./pages/role";
 
 function App() {
 
-    const [selectedAnswers, setSelectedAnswers] = useState(null);
-    const [responses, setResponses] = useState({'profession': null, 'answers': selectedAnswers});
+    const [responses, setResponses] = useState({profession: null, answers: null});
+
+    function setProfession(profession) {
+        setResponses({...responses, profession});
+    }
+
+    function setSelectedAnswers(selectedAnswers) {
+        setResponses({...responses, answers: selectedAnswers});
+    }
 
     // test mongodb post
     /*const answer = [
@@ -41,13 +48,13 @@ function App() {
                 <Routes>
                     <Route path='/' exact element={<Landing />} />
                     <Route path='/terms' exact element={<Terms />} />
-                    <Route path='/role' exact element={<Role />} />
+                    <Route path='/role' exact element={<Role setProfession={setProfession}/>} />
                     <Route path='/questions' exact element={<Questions setFinalSelectedAnswers={setSelectedAnswers}/>}/>
 
                     <Route
                         exact
                         path="/summary"
-                        element={selectedAnswers ? <SummaryAndFeedback responses={responses}/> : <Navigate replace to={"/"} />}
+                        element={responses.answers ? <SummaryAndFeedback responses={responses}/> : <Navigate replace to={"/"} />}
                     />
                     {/* <Route path='/summary' exact element={<SummaryAndFeedback />} /> */}
                 </Routes>
