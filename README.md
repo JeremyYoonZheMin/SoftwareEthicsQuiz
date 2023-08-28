@@ -18,3 +18,8 @@ If the server runs successfully, you should see the following output in the term
 ```
 Server is running on port: 5050
 ```
+
+To deploy to Github Pages, run:
+```
+npm run deploy
+```
