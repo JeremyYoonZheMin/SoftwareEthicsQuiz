@@ -84,7 +84,7 @@ export default function Questions({responses, setFinalSelectedAnswers}) {
             <div className='content'>
                 <Container fluid className='contentContainer'>
                     <Row className='contentRow'>
-                        {!smallScreen && (<Col xs={4} className='d-flex align-items-center'>
+                        {!smallScreen && (<Col xs={3} className='nerdContainer'>
                             <img src={nerd} alt='Person on laptop' className='img-fluid nerd'></img>
                         </Col>)}
                         <Col className='scenarioTextColumn'>
