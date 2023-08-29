@@ -11,7 +11,6 @@ function SummaryAndFeedback({ responses }) {
         console.log("I fire once");
         insert();
     }, []);
-    // TODO: get answers from other pg
     // responses = {
     //    profession: "IT Student",
     //     answers: [[3, 2, 3, 3],
@@ -23,11 +22,6 @@ function SummaryAndFeedback({ responses }) {
     // return;
 
     const navigate = useNavigate();
-
-    const getScoreOutOfFive = (totalScore, maxScore) => {
-        return Math.round((totalScore / maxScore) * 5);
-        // return score;
-    };
 
     async function insert() {
         await fetch("https://softwareethicsquiz-api.onrender.com/answer", {
@@ -51,12 +45,13 @@ function SummaryAndFeedback({ responses }) {
         });
 
         return score;
-        // return score;
     };
 
-    const getStars = (score) => {
+    const getStars = (totalScore, maxScore ) => {
+        let score = Math.round((totalScore / maxScore) * 5);
         const stars = [];
         let numStars = 5;
+
         for (let i = 0; i < score; i++) {
             stars.push(<FontAwesomeIcon icon={faStar} className='star' color='orange' />);
         }
@@ -81,28 +76,28 @@ function SummaryAndFeedback({ responses }) {
         );
     };
 
-    const getBestAnswer = (scenarioNum, quesNum) => {
-        let bestAnsScore = Number.MIN_VALUE;
-        let bestAns;
-        let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
+    // const getBestAnswer = (scenarioNum, quesNum) => {
+    //     let bestAnsScore = Number.MIN_VALUE;
+    //     let bestAns;
+    //     let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
 
-        for (let i = 0; i < answers.length; i++) {
-            if (answers[i].score > bestAnsScore) {
-                bestAnsScore = answers[i].score;
-                bestAns = answers[i];
-            }
-        }
-        return bestAns;
-    }
+    //     for (let i = 0; i < answers.length; i++) {
+    //         if (answers[i].score > bestAnsScore) {
+    //             bestAnsScore = answers[i].score;
+    //             bestAns = answers[i];
+    //         }
+    //     }
+    //     return bestAns;
+    // }
 
-    const getAllAnswers = (scenarioNum, quesNum) => {
-        let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
-        let answerList = [];
-        for (let i = 0; i < answers.length; i++) {
-            answerList[i] = answers[i].answer;
-        }
-        return answerList;
-    }
+    // const getAllAnswers = (scenarioNum, quesNum) => {
+    //     let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
+    //     let answerList = [];
+    //     for (let i = 0; i < answers.length; i++) {
+    //         answerList[i] = answers[i].answer;
+    //     }
+    //     return answerList;
+    // }
 
     const setQuestionFeedback = (scenarioNum, quesNum, selectedAnswers) => {
         setFeedbackBoxTitle("Question " + quesNum);
@@ -118,7 +113,10 @@ function SummaryAndFeedback({ responses }) {
             let isBest = e.score === 4;
             let classes = "answerGroup";
             let subtitle = null;
-            if (isBest) {
+            if (ans === i && isBest) {
+                subtitle = "You Selected Best answer";
+                classes += " bestAns";
+            } else if (isBest) {
                 subtitle = "Best answer";
                 classes += " bestAns";
             } else if (ans === i) {
@@ -155,22 +153,20 @@ function SummaryAndFeedback({ responses }) {
     // let selectedAnswers = useLocation().state;
 
     // const { state: { selectedAnswers } = {} } = useLocation();
-    console.log(responses);
-    let totalScore = 0;
-    let score = 0;
-    let maxScore = 16 * 4;
+    // console.log(responses);
+  
 
-    if (responses !== null) {
-        totalScore = getScore(responses.answers);
-        score = getScoreOutOfFive(totalScore, maxScore);
-    } else {
+    if (responses === null) {
         console.log('null answers');
         navigate('/');
-    };
+        
+    }
+
+    let totalScore = getScore(responses.answers);
+    let maxScore = 16 * 4;
 
     const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Question");
-    // const [feedbackBoxContent, setFeedbackBoxContent] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean in sem cursus, convallis ex in, rutrum lorem. Curabitur efficitur ante ac congue sodales. Mauris varius ac sapien sit amet fermentum. Morbi quis dui efficitur mauris ultrices ullamcorper in quis nibh. Nulla dignissim eu ex at imperdiet. Maecenas sollicitudin venenatis ex ut porttitor. Vestibulum eget sodales sapien, sed vehicula orci. Nunc vel augue vitae orci vestibulum molestie. Sed dapibus urna sed facilisis sagittis.");
-    const stars = useState(getStars(score));
+    const stars = useState(getStars(totalScore, maxScore));
     const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>Select a question to view your results</p>);
 
     let overallFeedbackTitle = "";
@@ -193,6 +189,8 @@ function SummaryAndFeedback({ responses }) {
         overallFeedbackTitle = "Excellent Attempt";
         overallFeedbackContent = "Congratulations! You are a software ethics expert.";
     }
+
+    
 
     function tryAgain() {
         const path = "/questions";
