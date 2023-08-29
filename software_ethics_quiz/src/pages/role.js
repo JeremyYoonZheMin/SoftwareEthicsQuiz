@@ -1,4 +1,5 @@
 import '../styles/questions.css'
+import '../styles/role.css'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -26,7 +27,7 @@ export default function Role({setProfession}) {
     }
 
     return (
-        <div className="questionsPage">
+        <div className="questionsPage rolePage">
             <div className='content'>
                 <Container fluid className='contentContainer'>
                     <Row className='contentRow'>
