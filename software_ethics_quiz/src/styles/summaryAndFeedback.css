@@ -32,7 +32,7 @@
 } */
 
 .feedback-container {
-    padding-right: 20px;
+    /* padding-right: 20px; */
     z-index: 0;
 }
 
@@ -58,7 +58,6 @@
 
 .feedbackBox, .feedbackBoxInnerBox {
     font-size: 24px;
-    padding: 40px 30px 20px 30px;
     margin-bottom: 20px;
     border-radius: 10px;
     text-align: center;
@@ -66,11 +65,13 @@
 
 .feedbackBox {
     background-color: rgba(255, 255, 255, 0.75);
+    padding: 40px 30px 20px 30px;
 }
 
 .feedbackBoxInnerBox {
     background-color: #1f1f1f;
     color: #ffffff;
+    padding: 20px 30px 20px 30px;
 }
 #answerBox {
     text-align: left;
@@ -128,9 +129,9 @@
 }
 
 @media all and (max-width: 768px) {
-    .feedback-container {
+    /* .feedback-container {
         padding-right: 0px;
-    }
+    } */
     .headerTitle {
         font-size: 40px;
     }
@@ -163,6 +164,7 @@
     .feedbackBox .star {
         /* color: #bbb0a8; */
         margin: 5px;
+        font-size: 32px;
     }
     .feedbackBoxInnerTitle {
         font-weight: bold;

@@ -47,7 +47,7 @@ function SummaryAndFeedback({ responses }) {
         return score;
     };
 
-    const getStars = (totalScore, maxScore ) => {
+    const getStars = (totalScore, maxScore) => {
         let score = Math.round((totalScore / maxScore) * 5);
         const stars = [];
         let numStars = 5;
@@ -111,38 +111,37 @@ function SummaryAndFeedback({ responses }) {
         let answers = [];
         SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers.forEach(function (e, i) {
             let isBest = e.score === 4;
-            let classes = "answerGroup";
-            let subtitle = null;
-            if (ans === i && isBest) {
-                subtitle = "You Selected Best answer";
-                classes += " bestAns";
-            } else if (isBest) {
-                subtitle = "Best answer";
-                classes += " bestAns";
-            } else if (ans === i) {
-                subtitle = "Selected answer";
-                classes += " selectedAns";
-            }
 
-            answers.push(
-                <div className={classes}>
-                    {subtitle ? <div className='subtitle fs-5 text'>{subtitle}</div> : null}
-                    <div className='answerGroup'>
-                        {isBest ? <i class="bi bi-check-lg" ></i> : <i class="bi bi-x-lg" ></i>}
+            if (ans === i && isBest) {
+                answers[0] = <div className="answerGroup">
+                    <p className='feedbackBoxInnerTitle'>You Selected The Best answer</p>
+                    <div className="feedbackBoxInnerBox" id='answerBox'>
                         {e.answer}
                     </div>
-                    <br />
-                </div>
-            );
+                </div>;
+                return false;
+            } else if (isBest) {
+                answers[1] = <div className="answerGroup">
+                    <p className='feedbackBoxInnerTitle'>Best Answer</p>
+                    <div className="feedbackBoxInnerBox" id='answerBox'>
+                        {e.answer}
+                    </div>
+                </div>;
+            } else if (ans === i) {
+                answers[0] = <div className="answerGroup">
+                    <p className='feedbackBoxInnerTitle'>You Selected</p>
+                    <div className="feedbackBoxInnerBox" id='answerBox'>
+                        {e.answer}
+                    </div>
+                </div>;
+            }
+
         });
 
         setFeedbackBoxContent(
             <div className="feedbackBoxQuestionBoxGroup">
                 <p>{question}</p>
-                <p className='feedbackBoxInnerTitle'>Answer</p>
-                <div className="feedbackBoxInnerBox" id='answerBox'>
-                    {answers}
-                </div>
+                {answers}
                 <p>{quesFeedback}</p>
                 <button type="button" class="btn btn-outline-dark feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, selectedAnswers)}>Scenario</button>
                 <button type="button" class="btn btn-outline-dark active feedbackBoxBtn" id='questionBtn'>Question</button>
@@ -154,12 +153,12 @@ function SummaryAndFeedback({ responses }) {
 
     // const { state: { selectedAnswers } = {} } = useLocation();
     // console.log(responses);
-  
+
 
     if (responses === null) {
         console.log('null answers');
         navigate('/');
-        
+
     }
 
     let totalScore = getScore(responses.answers);
@@ -190,7 +189,7 @@ function SummaryAndFeedback({ responses }) {
         overallFeedbackContent = "Congratulations! You are a software ethics expert.";
     }
 
-    
+
 
     function tryAgain() {
         const path = "/questions";
