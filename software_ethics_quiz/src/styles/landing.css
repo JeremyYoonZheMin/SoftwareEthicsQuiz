@@ -1,8 +1,8 @@
 .landingPage {
     height: 100vh;
-    background-image: url('../assets/landingBackground.png');
+    /* background-image: url('../assets/landingBackground.png');
     background-position: center;
-    background-size: cover;
+    background-size: cover; */
     display: flex;
     align-items: center;
     padding-right: 100px;

@@ -9,30 +9,15 @@ import Role from "./pages/role";
 
 function App() {
 
-    const [selectedAnswers, setSelectedAnswers] = useState(null);
+    const [responses, setResponses] = useState({profession: null, answers: null});
 
-    // test mongodb post
-    /*const answer = [
-        [1, 2, 3, 4],
-        [3, 2, 4, 1],
-        [2, 3, 4, 1],
-        [1, 2, 3, 4]
-    ];
- 
-    async function insert() {
-    await fetch("http://localhost:5050/answer", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify(answer),
-    }).catch(e => {
-        console.error(e);
-        return;
-    });
+    function setProfession(profession) {
+        setResponses({...responses, profession});
     }
 
-    insert();*/
+    function setSelectedAnswers(selectedAnswers) {
+        setResponses({...responses, answers: selectedAnswers});
+    }
 
     return (
         <main className="App">
@@ -40,13 +25,13 @@ function App() {
                 <Routes>
                     <Route path='/' exact element={<Landing />} />
                     <Route path='/terms' exact element={<Terms />} />
-                    <Route path='/role' exact element={<Role />} />
-                    <Route path='/questions' exact element={<Questions setFinalSelectedAnswers={setSelectedAnswers}/>}/>
+                    <Route path='/role' exact element={<Role setProfession={setProfession}/>} />
+                    <Route path='/questions' exact element={<Questions responses={responses} setFinalSelectedAnswers={setSelectedAnswers}/>}/>
 
                     <Route
                         exact
                         path="/summary"
-                        element={selectedAnswers ? <SummaryAndFeedback selectedAnswers={selectedAnswers}/> : <Navigate replace to={"/"} />}
+                        element={responses.answers ? <SummaryAndFeedback responses={responses}/> : <Navigate replace to={"/"} />}
                     />
                     {/* <Route path='/summary' exact element={<SummaryAndFeedback />} /> */}
                 </Routes>

@@ -10,7 +10,7 @@ import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { scenariosAndQuestions } from '../constants/scenariosAndQuestions';
 
-export default function Questions({setFinalSelectedAnswers}) {
+export default function Questions({responses, setFinalSelectedAnswers}) {
 
     let numQuestions = scenariosAndQuestions.reduce((numQuestions, scenario) => numQuestions + scenario.questions.length, 0)
     let selectedAnswersStructure = Array(scenariosAndQuestions.length)
@@ -37,8 +37,7 @@ export default function Questions({setFinalSelectedAnswers}) {
         setSelectedAnswers(selectedAnswers)
         if (currentQuestion[0] == numQuestions - 1) {
             console.log(selectedAnswers);
-            setFinalSelectedAnswers(selectedAnswers)
-            insert();
+            setFinalSelectedAnswers(selectedAnswers);
             navigate('/summary');
         } else if (currentQuestion[1] == scenariosAndQuestions[currentScenario].questions.length - 1) {
             setCurrentScenario(currentScenario + 1)
@@ -61,20 +60,6 @@ export default function Questions({setFinalSelectedAnswers}) {
             setCurrentQuestion([currentQuestion[0] - 1, scenariosAndQuestions[currentScenario].questions.length - 1])
             setSelectedAnswer(selectedAnswers[currentScenario-1][scenariosAndQuestions[currentScenario].questions.length - 1])
         }   // User should not be able to call this function when they are on the first question
-    }
-
-    // Post answers to database
-    async function insert() {
-        await fetch("https://softwareethicsquiz-api.onrender.com/answer", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(selectedAnswers),
-        }).catch(e => {
-            console.error(e);
-            return;
-        });
     }
 
     function allQuestionsAnswered(event) {
@@ -132,7 +117,7 @@ export default function Questions({setFinalSelectedAnswers}) {
                     </Row>
                 </Container>
                 <div className='navigationButtons'>
-                    {(currentQuestion[0] > 0) && (<div className={`navigationButtonContainer ${!smallScreen && 'my-5'}`}>
+                    {(currentQuestion[0] > 0) && (<div className={`navigationButtonContainer my-5`}>
                         <Button variant='outline-light' size='lg' className='navigationButton' onClick={goToPreviousQuestion}>Previous</Button>
                     </div>)}
                     <div className='navigationButtonContainer my-5'>
