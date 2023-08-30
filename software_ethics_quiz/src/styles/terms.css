@@ -2,7 +2,7 @@
     /* background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('../assets/landingBackground.png');
     background-position: center;
     background-size: cover; */
-    padding: 10vh 10vw;
+    padding: 10vh 0;
     min-height: 100vh;
 }
 .termsTitle {
@@ -14,19 +14,23 @@
 .frameContainer {
     height: 50vh;
     margin: 0 auto;
-    width: 75%;
 }
 .frame {
     display: block;
     margin: auto;
     text-align: center;
-    width: 75%;
+    width: 50%;
     height: 100%;
     background: #FFFFFF;
     border-radius: 15px;
 }
+@media screen and (max-width: 768px) {
+    .frame {
+        width: 80%;
+    }
+}
 .checkbox {
-    padding-top: 30px;
+    padding: 30px 20vw 0;
     color: #FFFFFF;
     display: flex;
     justify-content: center;
