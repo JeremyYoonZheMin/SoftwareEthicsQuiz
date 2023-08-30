@@ -47,6 +47,25 @@ function SummaryAndFeedback({ responses }) {
         return score;
     };
 
+    const getMaxScore = (scenariosAndQuestions) => {
+        let score = 0;
+
+        scenariosAndQuestions.forEach(s => {
+            s.questions.forEach(q => {
+                let quesMaxScore = 0;
+                q.answers.forEach(a => {
+                    if (a.score > quesMaxScore) {
+                        quesMaxScore = a.score;
+                    }
+                });
+                score += quesMaxScore;
+            });
+        })
+
+        return score;
+    };
+
+
     const getStars = (totalScore, maxScore) => {
         let score = Math.round((totalScore / maxScore) * 5);
         const stars = [];
@@ -75,29 +94,6 @@ function SummaryAndFeedback({ responses }) {
             </div>
         );
     };
-
-    // const getBestAnswer = (scenarioNum, quesNum) => {
-    //     let bestAnsScore = Number.MIN_VALUE;
-    //     let bestAns;
-    //     let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
-
-    //     for (let i = 0; i < answers.length; i++) {
-    //         if (answers[i].score > bestAnsScore) {
-    //             bestAnsScore = answers[i].score;
-    //             bestAns = answers[i];
-    //         }
-    //     }
-    //     return bestAns;
-    // }
-
-    // const getAllAnswers = (scenarioNum, quesNum) => {
-    //     let answers = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers;
-    //     let answerList = [];
-    //     for (let i = 0; i < answers.length; i++) {
-    //         answerList[i] = answers[i].answer;
-    //     }
-    //     return answerList;
-    // }
 
     const setQuestionFeedback = (scenarioNum, quesNum, selectedAnswers) => {
         setFeedbackBoxTitle("Question " + quesNum);
@@ -149,11 +145,30 @@ function SummaryAndFeedback({ responses }) {
         );
     };
 
-    // let selectedAnswers = useLocation().state;
+    const getQuestionBtns = (scenariosAndQuestions) => {
+        let questionCount = 0;
+        let btnGroup = [];
 
-    // const { state: { selectedAnswers } = {} } = useLocation();
-    // console.log(responses);
+        scenariosAndQuestions.forEach(function (scenario, scenarioNum) {
+            let btns = [];
 
+            scenario.questions.forEach(function (question, questionNum) {
+                let q = questionCount++;
+                console.log("questionCount " + questionCount + " scenario" + scenarioNum + " question" + questionNum);
+                btns.push(<Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(scenarioNum + 1, q, responses.answers)}>Question {questionCount}</Button>);
+            });
+
+            btnGroup.push(<Stack gap={1}>
+                {btns}
+            </Stack>);
+        })
+
+        return (
+            <Col sm={4} className="questions-container">
+                {btnGroup}
+            </Col>
+        );
+    };
 
     if (responses === null) {
         console.log('null answers');
@@ -162,11 +177,12 @@ function SummaryAndFeedback({ responses }) {
     }
 
     let totalScore = getScore(responses.answers);
-    let maxScore = 16 * 4;
+    let maxScore = getMaxScore(SCENARIO_AND_QUESTIONS);
 
     const [feedbackBoxTitle, setFeedbackBoxTitle] = useState("Question");
     const stars = useState(getStars(totalScore, maxScore));
     const [feedbackBoxContent, setFeedbackBoxContent] = useState(<p>Select a question to view your results</p>);
+    const questionBtnContent = useState(getQuestionBtns(SCENARIO_AND_QUESTIONS));
 
     let overallFeedbackTitle = "";
     let overallFeedbackContent = "";
@@ -225,35 +241,7 @@ function SummaryAndFeedback({ responses }) {
                             </Stack>
                             <button href="/" class="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
                         </Col>
-                        <Col sm={4} className="questions-container">
-                            <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(1, 1, responses.answers)}>Question 1</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(1, 2, responses.answers)}>Question 2</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(1, 3, responses.answers)}>Question 3</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(1, 4, responses.answers)}>Question 4</Button>
-                            </Stack>
-                            <br />
-                            <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 5, responses.answers)}>Question 5</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 6, responses.answers)}>Question 6</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 7, responses.answers)}>Question 7</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(2, 8, responses.answers)}>Question 8</Button>
-                            </Stack>
-                            <br />
-                            <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 9, responses.answers)}>Question 9</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 10, responses.answers)}>Question 10</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 11, responses.answers)}>Question 11</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(3, 12, responses.answers)}>Question 12</Button>
-                            </Stack>
-                            <br />
-                            <Stack gap={1}>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 13, responses.answers)}>Question 13</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 14, responses.answers)}>Question 14</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 15, responses.answers)}>Question 15</Button>
-                                <Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(4, 16, responses.answers)}>Question 16</Button>
-                            </Stack>
-                        </Col>
+                        {questionBtnContent}
                     </Row>
                 </Container>
             </div>
