@@ -72,40 +72,38 @@ function SummaryAndFeedback({ responses }) {
         let numStars = 5;
 
         for (let i = 0; i < score; i++) {
-            stars.push(<FontAwesomeIcon icon={faStar} className='star' color='orange' />);
+            stars.push(<FontAwesomeIcon key={'star_'+ i} icon={faStar} className='star' color='orange' />);
         }
         for (let i = 0; i < (numStars - score); i++) {
-            stars.push(<FontAwesomeIcon icon={faStar} className='star' />);
+            stars.push(<FontAwesomeIcon key={'star_'+ (i + score)} icon={faStar} className='star' />);
         }
 
         return stars;
     };
 
-    const setScenario = (scenarioNum, quesNum, selectedAnswers) => {
-        let scenario = SCENARIO_AND_QUESTIONS[scenarioNum - 1].scenario;
+    const setScenario = (scenarioNum, quesNum, overallQuesNum, selectedAnswers) => {
+        let scenario = SCENARIO_AND_QUESTIONS[scenarioNum].scenario;
 
         setFeedbackBoxContent(
             <div className="feedbackBoxQuestionBoxGroup">
                 <p>
                     {scenario}
                 </p>
-                <button type="button" class="btn btn-outline-dark active feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, selectedAnswers)}>Scenario</button>
-                <button type="button" class="btn btn-outline-dark feedbackBoxBtn" id='questionBtn' onClick={() => setQuestionFeedback(scenarioNum, quesNum, selectedAnswers)}>Question</button>
+                <button type="button" className="btn btn-outline-dark active feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, overallQuesNum, selectedAnswers)}>Scenario</button>
+                <button type="button" className="btn btn-outline-dark feedbackBoxBtn" id='questionBtn' onClick={() => setQuestionFeedback(scenarioNum, quesNum, overallQuesNum, selectedAnswers)}>Question</button>
             </div>
         );
     };
 
-    const setQuestionFeedback = (scenarioNum, quesNum, selectedAnswers) => {
-        setFeedbackBoxTitle("Question " + quesNum);
+    const setQuestionFeedback = (scenarioNum, quesNum, overallQuesNum, selectedAnswers) => {
+        setFeedbackBoxTitle("Question " + overallQuesNum);
 
-        quesNum = quesNum % 4 === 0 ? 4 : quesNum % 4;
-
-        let ans = selectedAnswers[scenarioNum - 1][quesNum - 1];
-        let quesFeedback = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers[ans].userFeedback;
-        let question = SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].question;
+        let ans = selectedAnswers[scenarioNum][quesNum];
+        let quesFeedback = SCENARIO_AND_QUESTIONS[scenarioNum].questions[quesNum].answers[ans].userFeedback;
+        let question = SCENARIO_AND_QUESTIONS[scenarioNum].questions[quesNum].question;
 
         let answers = [];
-        SCENARIO_AND_QUESTIONS[scenarioNum - 1].questions[quesNum - 1].answers.forEach(function (e, i) {
+        SCENARIO_AND_QUESTIONS[scenarioNum].questions[quesNum].answers.forEach(function (e, i) {
             let isBest = e.score === 4;
 
             if (ans === i && isBest) {
@@ -139,8 +137,8 @@ function SummaryAndFeedback({ responses }) {
                 <p>{question}</p>
                 {answers}
                 <p>{quesFeedback}</p>
-                <button type="button" class="btn btn-outline-dark feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, selectedAnswers)}>Scenario</button>
-                <button type="button" class="btn btn-outline-dark active feedbackBoxBtn" id='questionBtn'>Question</button>
+                <button type="button" className="btn btn-outline-dark feedbackBoxBtn" id='scenarioBtn' onClick={() => setScenario(scenarioNum, quesNum, overallQuesNum, selectedAnswers)}>Scenario</button>
+                <button type="button" className="btn btn-outline-dark active feedbackBoxBtn" id='questionBtn'>Question</button>
             </div>
         );
     };
@@ -153,9 +151,8 @@ function SummaryAndFeedback({ responses }) {
             let btns = [];
 
             scenario.questions.forEach(function (question, questionNum) {
-                let q = questionCount++;
-                console.log("questionCount " + questionCount + " scenario" + scenarioNum + " question" + questionNum);
-                btns.push(<Button variant='outline-light' className="questionButton" onClick={() => setQuestionFeedback(scenarioNum + 1, q, responses.answers)}>Question {questionCount}</Button>);
+                let q = ++questionCount;
+                btns.push(<Button variant='outline-light' className="questionButton" key={'ques_btn_' + q} onClick={() => setQuestionFeedback(scenarioNum, questionNum, q, responses.answers)}>Question {questionCount}</Button>);
             });
 
             btnGroup.push(<Stack gap={1}>
@@ -200,7 +197,7 @@ function SummaryAndFeedback({ responses }) {
         overallFeedbackTitle = "Very Good Attempt";
         overallFeedbackContent = "You are on track to becoming a software ethics expert.";
     }
-    else if (overallScore >= 51 && overallScore <= 75) {
+    else {
         overallFeedbackTitle = "Excellent Attempt";
         overallFeedbackContent = "Congratulations! You are a software ethics expert.";
     }
@@ -239,7 +236,7 @@ function SummaryAndFeedback({ responses }) {
                                     </div>
                                 </div>
                             </Stack>
-                            <button href="/" class="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
+                            <button href="/" className="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
                         </Col>
                         {questionBtnContent}
                     </Row>
