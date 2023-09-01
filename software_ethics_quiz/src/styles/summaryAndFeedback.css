@@ -99,6 +99,25 @@
     border-radius: 20px !important;
 }
 
+.showFeedbackFormButton {
+    width: 400px;
+    height: 80px;
+    font-size: 35px !important;
+    margin-bottom: 20px;
+    border-width: 3px !important;
+    border-radius: 20px !important;
+}
+
+.frame {
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 15px;
+}
+
 .tryAgainButton:hover {
     background: #ffffff4e !important;
     color: #ffffff !important;
@@ -142,6 +161,14 @@
         width: 200px;
         height: 60px;
         font-size: 25px !important;
+        margin-bottom: 20px;
+        border-width: 3px !important;
+        border-radius: 20px !important;
+    }
+    .showFeedbackFormButton {
+        width: 250px;
+        height: 60px;
+        font-size: 20px !important;
         margin-bottom: 20px;
         border-width: 3px !important;
         border-radius: 20px !important;

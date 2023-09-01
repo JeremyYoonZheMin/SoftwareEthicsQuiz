@@ -11,13 +11,13 @@ function SummaryAndFeedback({ responses }) {
         console.log("I fire once");
         insert();
     }, []);
-    // responses = {
-    //    profession: "IT Student",
-    //     answers: [[3, 2, 3, 3],
-    //    [3, 3, 3, 3],
-    //     [3, 3, 3, 3],
-    //     [3, 3, 3, 3]]
-    // };
+     responses = {
+        profession: "IT Student",
+         answers: [[3, 2, 3, 3],
+        [3, 3, 3, 3],
+         [3, 3, 3, 3],
+         [3, 3, 3, 3]]
+     };
 
     // return;
 
@@ -202,8 +202,11 @@ function SummaryAndFeedback({ responses }) {
         overallFeedbackContent = "Congratulations! You are a software ethics expert.";
     }
 
-
-
+    const [showFeedbackForm, setShowFeedbackForm] = React.useState(false);
+    const toggleFeedbackForm = () => {
+        setShowFeedbackForm(!showFeedbackForm);
+    };
+    
     function tryAgain() {
         const path = "/questions";
         navigate(path);
@@ -236,7 +239,20 @@ function SummaryAndFeedback({ responses }) {
                                     </div>
                                 </div>
                             </Stack>
+                            <Stack gap={3}>
+                            <button href="/" className="btn btn-outline-light btn-lg showFeedbackFormButton" onClick={toggleFeedbackForm}>Give Your Feedback</button>
+                            {showFeedbackForm && 
+                            (
+                                <div classname="feedbackForm">
+                                    <iframe className="frame"
+                                    src="https://docs.google.com/forms/d/e/1FAIpQLSdaLn482RAEdQ39qqFw5oN71F7ghV_pCwRiCNVP_L80K1bitA/viewform?embedded=true" title='frame'>
+                                        Loading…
+                                    </iframe>
+                                </div>
+                            )
+                            }
                             <button href="/" className="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
+                            </Stack>
                         </Col>
                         {questionBtnContent}
                     </Row>
