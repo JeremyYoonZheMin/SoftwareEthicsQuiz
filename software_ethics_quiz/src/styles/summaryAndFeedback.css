@@ -108,7 +108,7 @@
     border-radius: 20px !important;
 }
 
-.frame {
+.feedbackFrame {
     display: block;
     margin: auto;
     text-align: center;
@@ -165,7 +165,7 @@
         border-width: 3px !important;
         border-radius: 20px !important;
     }
-    .frame {
+    .feedbackFrame {
         display: block;
         margin: auto;
         text-align: center;

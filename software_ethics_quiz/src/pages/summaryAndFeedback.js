@@ -245,7 +245,7 @@ function SummaryAndFeedback({ responses }) {
                                 {showFeedbackForm && 
                                     (
                                         <div classname="feedbackForm">
-                                        <iframe className="frame"
+                                        <iframe className="feedbackFrame"
                                         src="https://docs.google.com/forms/d/e/1FAIpQLSdaLn482RAEdQ39qqFw5oN71F7ghV_pCwRiCNVP_L80K1bitA/viewform?embedded=true" title='frame'>
                                             Loading…
                                         </iframe>
