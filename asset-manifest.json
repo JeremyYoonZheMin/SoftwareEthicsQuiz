@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/SoftwareEthicsQuiz/static/css/main.104f8f46.css",
-    "main.js": "/SoftwareEthicsQuiz/static/js/main.20fbaeb0.js",
+    "main.js": "/SoftwareEthicsQuiz/static/js/main.9d4216b3.js",
     "static/js/787.64f6d135.chunk.js": "/SoftwareEthicsQuiz/static/js/787.64f6d135.chunk.js",
     "static/media/landingBackground.png": "/SoftwareEthicsQuiz/static/media/landingBackground.c36f0466821aa2584b86.png",
     "static/media/nerd.png": "/SoftwareEthicsQuiz/static/media/nerd.e9056d59de5e966787c6.png",
     "index.html": "/SoftwareEthicsQuiz/index.html",
     "main.104f8f46.css.map": "/SoftwareEthicsQuiz/static/css/main.104f8f46.css.map",
-    "main.20fbaeb0.js.map": "/SoftwareEthicsQuiz/static/js/main.20fbaeb0.js.map",
+    "main.9d4216b3.js.map": "/SoftwareEthicsQuiz/static/js/main.9d4216b3.js.map",
     "787.64f6d135.chunk.js.map": "/SoftwareEthicsQuiz/static/js/787.64f6d135.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.104f8f46.css",
-    "static/js/main.20fbaeb0.js"
+    "static/js/main.9d4216b3.js"
   ]
 }
