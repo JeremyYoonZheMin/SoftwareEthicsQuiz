@@ -208,7 +208,7 @@ function SummaryAndFeedback({ responses }) {
     };
     
     function tryAgain() {
-        const path = "/questions";
+        const path = "/role";
         navigate(path);
     }
 
