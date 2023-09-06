@@ -11,13 +11,13 @@ function SummaryAndFeedback({ responses }) {
         console.log("I fire once");
         insert();
     }, []);
-    // responses = {
-    //    profession: "IT Student",
-    //     answers: [[3, 2, 3, 3],
-    //    [3, 3, 3, 3],
-    //     [3, 3, 3, 3],
-    //     [3, 3, 3, 3]]
-    // };
+//     responses = {
+//        profession: "IT Student",
+//         answers: [[3, 2, 3, 3],
+//        [3, 3, 3, 3],
+//         [3, 3, 3, 3],
+//         [3, 3, 3, 3]]
+//     };
 
     // return;
 
@@ -108,7 +108,7 @@ function SummaryAndFeedback({ responses }) {
 
             if (ans === i && isBest) {
                 answers[0] = <div className="answerGroup">
-                    <p className='feedbackBoxInnerTitle'>You Selected The Best answer</p>
+                    <p className='feedbackBoxInnerTitle'>You Selected The Ideal Answer</p>
                     <div className="feedbackBoxInnerBox" id='answerBox'>
                         {e.answer}
                     </div>
@@ -116,7 +116,7 @@ function SummaryAndFeedback({ responses }) {
                 return false;
             } else if (isBest) {
                 answers[1] = <div className="answerGroup">
-                    <p className='feedbackBoxInnerTitle'>Best Answer</p>
+                    <p className='feedbackBoxInnerTitle'>Ideal Answer</p>
                     <div className="feedbackBoxInnerBox" id='answerBox'>
                         {e.answer}
                     </div>
@@ -241,7 +241,7 @@ function SummaryAndFeedback({ responses }) {
                             </Stack>
                             <Stack gap={2}>
                                 <button href="/" className="btn btn-outline-light btn-lg tryAgainButton" onClick={tryAgain}>Try Again</button>
-                                <button href="/" className="btn btn-outline-light btn-lg showFeedbackFormButton" onClick={toggleFeedbackForm}>Give Your Feedback</button>
+                                <button href="/" className="btn btn-success btn-lg showFeedbackFormButton" onClick={toggleFeedbackForm}>Give Your Feedback</button>
                                 {showFeedbackForm && 
                                     (
                                         <div classname="feedbackForm">
